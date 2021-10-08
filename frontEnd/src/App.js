@@ -7,6 +7,7 @@ import Navbar from "./Component/NavBar/Navbar";
 import { Profile } from "./Component/Dashbord/Profile";
 import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
+import { VideoStream } from "./Component/Video/VideoStream";
 
 export const userContext = createContext();
 const Routing = () => {
@@ -25,6 +26,7 @@ const Routing = () => {
       <Route path="/logout">
         <Logout />
       </Route>
+      <Route path="/test" component={VideoStream} />
     </Switch>
   );
 };
