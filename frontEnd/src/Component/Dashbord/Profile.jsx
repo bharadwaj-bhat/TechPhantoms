@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./profile.css";
 
 export const Profile = () => {
-  const [userData, setUserData] = useState();
+  const [setUserData] = useState();
 
   const history = useHistory();
   const callProfilePage = async () => {
@@ -30,6 +30,7 @@ export const Profile = () => {
   };
   useEffect(() => {
     callProfilePage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

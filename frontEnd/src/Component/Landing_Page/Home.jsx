@@ -35,7 +35,14 @@ function Home() {
         </div>
       </div>
       <div>
-        <svg style={{ height: "70", width: "100%", zIndex: "5" }}>
+        <svg
+          style={{
+            height: "70",
+            width: "100%",
+            zIndex: "5",
+            marginBottom: "6px",
+          }}
+        >
           <polygon
             points="0,60 0,30 1700,60"
             style={{ fill: "#0a0a0a", stroke: "none", strokeWidth: "1" }}
@@ -132,8 +139,8 @@ function Home() {
         </p>
         <img src="https://www.pramp.com/img/prampSession.png" alt="img" />
         <p>
-          We've built Pramp to provide the complete tech interview practice you
-          need, for free. Hone your interviewing skills, learn from your peers,
+          We've built Platform to provide the complete tech practice you need,
+          for free. Based on your interviewing skills, learn from your peers,
           and become comfortable performing under pressure within an interview
           setting.
         </p>

@@ -3,9 +3,8 @@ import "./Signup.css";
 import { useHistory, Link } from "react-router-dom";
 import { userContext } from "../../App";
 
-
 const Login = () => {
-  const { state, dispatch } = useContext(userContext);
+  const { dispatch } = useContext(userContext);
   const history = useHistory();
   const [user, setuser] = React.useState({
     email: "",
