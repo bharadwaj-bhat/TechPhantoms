@@ -41,7 +41,7 @@ const variants = {
 
 return (
 
-    <div className={styles.abs}>
+    
 	<Frame
 	y={yPos}
 	variants={variants}
@@ -71,7 +71,7 @@ return (
 		background="linear-gradient(90deg, #ffc75f5c 50%, #ee82ee42 50%"
 		// background: linear-gradient(orange, violet);
 		width="100%"
-		height={300}
+		height={200}
         color={"#464343"}
 		>
             <div className={styles.infoData}>
@@ -122,11 +122,10 @@ return (
 			setState(false);
 		}}
 		>
-		<ImCross style={{marginTop:"15px"}} color="#464343" />
+		<ImCross style={{marginTop:"1px"}} color="#464343" />
 		</Frame>
 	)}
 	</Frame>
-    </div>
 );
 };
 

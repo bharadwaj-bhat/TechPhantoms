@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { userContext } from "../../App";
 import styles from "./Navbar.module.css";
-
+import { cardBgColor } from "../Colors/colors";
 // import "./Navbar.css";
 
 function Navbar() {
@@ -85,7 +85,7 @@ function Navbar() {
       >
         <polygon
           points="-300,0 1400,-30 1700,20"
-          style={{ fill: "#c76767", stroke: "none", strokeWidth: "1" }}
+          style={{ fill:{cardBgColor}, stroke: "none", strokeWidth: "1" }}
         />
       </svg>
     </div>
@@ -106,7 +106,7 @@ export const Navbars = styled.div`
 export const Hover = styled.div`
   color: white;
   text-decoration: none;
-  &::hover {
+  &:hover {
     Link {
       background-color: white;
       display: none;

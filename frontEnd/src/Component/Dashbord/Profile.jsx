@@ -30,6 +30,7 @@ export const Profile = () => {
     console.log(loggedData, "loginData");
   return (
     <>
+    <div>
     <MainContainer>
     <Box className="cont-box" sx={{ flexGrow: 1 }}>
       <Grid className="grid-cont" container spacing={2}>
@@ -46,24 +47,31 @@ export const Profile = () => {
       </Grid>
     </Box>
     </MainContainer>
+    </div>
     </>
   )
 }
 
 const MainContainer = styled.div`
-  width:100%;
+  /* width:100%; */
+  /* margin:500px auto; */
 
   & .cont-box{
+    padding:8% 2%;
   }
 
   & .grid-cont{
   }
 
   & .grid-item1{
-    /* text-align:center !important; */
+    position: relative;
+
   }
   & .grid-item2{
     /* border:1px solid blue; */
     max-width:500px;
+  }
+  & .grid-item{
+    position:relative;
   }
 `

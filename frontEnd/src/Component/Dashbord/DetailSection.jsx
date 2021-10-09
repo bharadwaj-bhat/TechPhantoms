@@ -29,7 +29,7 @@ export const DetailSection = ({loggedData}) => {
             </div> */}
         <div>
             
-        <Scroll width={375} height={"50%"}>
+        <Scroll width={375} height={"100%"}>
           {/* Card component with props yPos,title,subtitle */}
           <Card
             yPos={10}
