@@ -33,9 +33,18 @@ const servers = {
 };
 const pc = new RTCPeerConnection(servers);
 
-export function VideoStream() {
+export function VideoStream({ link }) {
   const [currentPage, setCurrentPage] = useState("home");
   const [joinCode, setJoinCode] = useState("");
+
+  useEffect(() => {
+    return () => {
+      firestore.collection("isActive").doc("isActive123").update({
+        active: false,
+        link: "",
+      });
+    };
+  });
 
   return (
     <div className="app">
@@ -46,7 +55,12 @@ export function VideoStream() {
           setPage={setCurrentPage}
         />
       ) : (
-        <Videos mode={currentPage} callId={joinCode} setPage={setCurrentPage} />
+        <Videos
+          link={link}
+          mode={currentPage}
+          callId={joinCode}
+          setPage={setCurrentPage}
+        />
       )}
     </div>
   );
@@ -78,7 +92,7 @@ function Menu({ joinCode, setJoinCode, setPage }) {
   );
 }
 
-function Videos({ mode, callId, setPage }) {
+function Videos({ mode, callId, setPage, link }) {
   const [webcamActive, setWebcamActive] = useState(false);
   const [roomId, setRoomId] = useState(callId);
 
@@ -115,6 +129,11 @@ function Videos({ mode, callId, setPage }) {
 
       setRoomId(callDoc.id);
 
+      firestore.collection("isActive").doc("isActive123").update({
+        active: true,
+        link: callDoc.id,
+      });
+
       pc.onicecandidate = (event) => {
         event.candidate && offerCandidates.add(event.candidate.toJSON());
       };
@@ -146,7 +165,7 @@ function Videos({ mode, callId, setPage }) {
         });
       });
     } else if (mode === "join") {
-      const callDoc = firestore.collection("calls").doc(callId);
+      const callDoc = firestore.collection("calls").doc(link);
       const answerCandidates = callDoc.collection("answerCandidates");
       const offerCandidates = callDoc.collection("offerCandidates");
 
@@ -223,23 +242,13 @@ function Videos({ mode, callId, setPage }) {
           position: "absolute",
           top: "80px",
           left: "130px",
-          width: "300px",
           zIndex: 5,
-          borderRadius: "25px",
-          overflow: "hidden",
         }}
       >
-        <video width="100%" ref={localRef} autoPlay playsInline muted />
+        <video width="320" ref={localRef} autoPlay playsInline muted />
       </div>
-      <div
-        style={{
-          maxWidth: "90%",
-          margin: "auto",
-          borderRadius: "25px",
-          overflow: "hidden",
-        }}
-      ></div>
-      <video width="100%" ref={remoteRef} autoPlay playsInline />
+      <div style={{ width: "100%", margin: "auto" }}></div>
+      <video width="900" ref={remoteRef} autoPlay playsInline />
 
       <div>
         <button onClick={hangUp} disabled={!webcamActive}></button>
@@ -264,3 +273,45 @@ function Videos({ mode, callId, setPage }) {
     </div>
   );
 }
+
+/**
+ 
+<div style={{ maxWidth: "80vw", margin: "auto" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: "80px",
+          left: "130px",
+          width: "250px",
+          zIndex: 5,
+          borderRadius: "25px",
+          overflow: "hidden",
+        }}
+      >
+        <video width="100%" ref={localRef} autoPlay playsInline muted />
+      </div>
+      <div
+        style={{
+          maxWidth: "70%",
+          margin: "auto",
+          borderRadius: "25px",
+          overflow: "hidden",
+        }}
+      ></div>
+      <video height="600" width="100%" ref={remoteRef} autoPlay playsInline />
+
+      <div>
+        <button onClick={hangUp} disabled={!webcamActive}></button>
+        <div>
+          <div>
+            <input
+              type="text"
+              onChange={(e) => setRoomId(e.target.value)}
+              value={roomId}
+            />
+          </div>
+        </div>
+      </div>
+
+  
+ */

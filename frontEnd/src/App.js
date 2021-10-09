@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import Signup from "./Component/Login_Signup/Signup";
 import Login from "./Component/Login_Signup/Login";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -10,15 +10,52 @@ import { initialState, reducer } from "./Reducer/reducer";
 import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 export const userContext = createContext();
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [page, setPage] = useState("create");
   const [temp, setTemp] = useState(true);
+  const [link, setLink] = useState("");
 
-  // if (temp) {
-  //   return <VideoStream />;
-  // }
+  useEffect(() => {
+    const db = firebase.firestore();
+
+    db.collection("isActive")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          let val = doc.data();
+          console.log("firestore val", val);
+          if (val.active === false) {
+            setPage("create");
+          } else {
+            setPage("join");
+            setLink(val.link);
+          }
+        });
+      });
+    return () => {
+      db.collection("isActive").doc("isActive123").update({
+        active: false,
+        link: "",
+      });
+    };
+  }, []);
+
+  if (temp) {
+    return (
+      <VideoStream
+        link={link}
+        setLink={setLink}
+        page={page}
+        setPage={setPage}
+      />
+    );
+  }
 
   return (
     <BrowserRouter>
