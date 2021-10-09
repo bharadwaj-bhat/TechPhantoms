@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { userContext } from "../../App";
@@ -36,4 +34,3 @@ const Logout = () => {
 };
 
 export default Logout;
->>>>>>> 69158c0b84cd6ca031bbdc4f86d6ca718c79d982

@@ -1,27 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-
-const Navbar = () => {
-      return (
-        <>
-          <Link to="/">home</Link>
-          <Link  to="/profile">profile</Link>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-        </>
-      );
-  };
-=======
 import styled from "styled-components";
 import { userContext } from "../../App";
-
-import "./Navbar.css";
+import styles from "./Navbar.module.css"
 
 function Navbar() {
   const { state } = useContext(userContext);
 
   return (
-    <div className="Navbody">
+    <div className={styles.Navbody}>
       <Navbars>
         <Link to="/">
           <img height="40px" src="" alt="LOGO" />
@@ -37,17 +24,17 @@ function Navbar() {
           }}
         >
           <Hover>
-            <Link to="/profile" className="links">
+            <Link to="/profile" className={styles.links}>
               Dashboard
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Learn
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Guides
             </Link>
           </Hover>
@@ -119,7 +106,6 @@ function Navbar() {
     </div>
   );
 }
->>>>>>> 69158c0b84cd6ca031bbdc4f86d6ca718c79d982
 
 export default Navbar;
 
