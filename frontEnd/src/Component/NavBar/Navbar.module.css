@@ -1,0 +1,46 @@
+.Navbody {
+  height: 70px;
+  background-color: rgb(221, 221, 221);
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+.links {
+  text-decoration: none;
+  color: rgb(44, 12, 73);
+  font-size: larger;
+}
+.links:hover {
+  filter: brightness(500%);
+}
+@media screen and (max-width: 780px) {
+  .Navbody {
+    height: 112px;
+  }
+}
+
+.authname {
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(230, 230, 230);
+}
+.authname2 {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgb(230, 230, 230);
+}
+
+.buttonlink {
+  border-radius: 30px;
+  width: 100px;
+  border: none;
+  background-color: rgb(192, 45, 40);
+  margin-top: -10px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.buttonlink:hover {
+  background-color: rgb(44, 12, 73);
+}

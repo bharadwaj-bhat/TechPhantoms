@@ -9,6 +9,8 @@ import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
 import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
+import "./App.css";
+import { DataForm } from "./Component/SelectField/DataForm";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -58,32 +60,33 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <>
-        <userContext.Provider value={{ state, dispatch }}>
-          <Navbar />
+    <>
+      <userContext.Provider value={{ state, dispatch }}>
+        <Navbar />
 
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/signup" component={Signup} />
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/logout">
-              <Logout />
-            </Route>
-            <Route path="/temp" component={VideoStream} />
-          </Switch>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/signup" component={Signup} />
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/selectField">
+            <DataForm />
+          </Route>
+          <Route path="/logout">
+            <Logout />
+          </Route>
+          <Route path="/temp" component={VideoStream} />
+        </Switch>
 
-          <Footer />
-        </userContext.Provider>
-      </>
-    </BrowserRouter>
+        <Footer />
+      </userContext.Provider>
+    </>
   );
 }
 
