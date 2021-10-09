@@ -223,13 +223,23 @@ function Videos({ mode, callId, setPage }) {
           position: "absolute",
           top: "80px",
           left: "130px",
+          width: "300px",
           zIndex: 5,
+          borderRadius: "25px",
+          overflow: "hidden",
         }}
       >
-        <video width="320" ref={localRef} autoPlay playsInline muted />
+        <video width="100%" ref={localRef} autoPlay playsInline muted />
       </div>
-      <div style={{ width: "100%", margin: "auto" }}></div>
-      <video width="900" ref={remoteRef} autoPlay playsInline />
+      <div
+        style={{
+          maxWidth: "90%",
+          margin: "auto",
+          borderRadius: "25px",
+          overflow: "hidden",
+        }}
+      ></div>
+      <video width="100%" ref={remoteRef} autoPlay playsInline />
 
       <div>
         <button onClick={hangUp} disabled={!webcamActive}></button>

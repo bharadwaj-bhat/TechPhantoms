@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import Signup from "./Component/Login_Signup/Signup";
 import Login from "./Component/Login_Signup/Login";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -14,6 +14,11 @@ export const userContext = createContext();
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [temp, setTemp] = useState(true);
+
+  // if (temp) {
+  //   return <VideoStream />;
+  // }
 
   return (
     <BrowserRouter>
