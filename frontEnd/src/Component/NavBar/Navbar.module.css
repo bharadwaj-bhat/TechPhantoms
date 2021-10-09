@@ -8,7 +8,7 @@
 
 .links {
   text-decoration: none;
-  color: rgb(44, 12, 73);
+  color: #26168bc1;
   font-size: larger;
 }
 .links:hover {
@@ -35,12 +35,12 @@
   border-radius: 30px;
   width: 100px;
   border: none;
-  background-color: rgb(192, 45, 40);
+  background-color:#26168bc1;
   margin-top: -10px;
   height: 40px;
   cursor: pointer;
 }
 
 .buttonlink:hover {
-  background-color: rgb(44, 12, 73);
+  background-color: linear-gradient(90deg, #afe6ffbe 50%, #facd7ba9 50%);
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer, useState } from "react";
 import Signup from "./Component/Login_Signup/Signup";
 import Login from "./Component/Login_Signup/Login";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "./Component/Landing_Page/Home";
 import Navbar from "./Component/NavBar/Navbar";
 import { Profile } from "./Component/Dashbord/Profile";
@@ -58,6 +58,8 @@ function App() {
       />
     );
   }
+
+  console.log("state:", state);
 
   return (
     <>
