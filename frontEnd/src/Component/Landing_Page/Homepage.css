@@ -1,0 +1,273 @@
+.Onvideo {
+  margin-top: -40%;
+  margin-bottom: 20px;
+}
+
+.dots {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAF0lEQVQYV2NkQAKMULYvAwPDZhgHLAYAD6kBBEMDSU4AAAAASUVORK5CYII=");
+}
+.Onvideo > h1 {
+  font-weight: 600;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+}
+.button {
+  height: 60px;
+  border-radius: 50px;
+  font-family: "Open Sans", sans-serif;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  width: 250px;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  border: none;
+  background: rgb(192, 45, 40);
+}
+
+.button:hover {
+  background: rgb(51, 48, 212);
+}
+
+.Subject-flex {
+  /* background-color: black; */
+  margin: auto;
+  margin-top: -20px;
+  height: fit-content;
+}
+
+.Subject {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  background-color: rgb(126, 126, 126);
+  justify-content: center;
+}
+
+#Subimage {
+  width: 140px;
+  height: 60px;
+  margin-top: 15px;
+  color: #131c26;
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+}
+
+#Subimage:hover {
+  width: 160px;
+  height: 80px;
+  margin-top: 0px;
+}
+.Subject > div {
+  width: 100px;
+  height: 100px;
+  margin-right: 80px;
+}
+
+@media screen and (max-width: 790px) {
+  .Onvideo > h1 {
+    font-weight: 400;
+    font-size: 25px;
+    color: white;
+  }
+  .Onvideo {
+    margin-top: -50%;
+    margin-bottom: 0px;
+  }
+}
+.heading {
+  font-size: 45px;
+}
+
+/* second div */
+
+.MainImageBox {
+  text-align: left;
+  /* margin: 10px auto; */
+  max-width: 100%;
+  border: 1px solid rgba(151, 151, 151, 0.322);
+  padding: 0 15px 25px 15px;
+  position: relative;
+  margin-top: -10px;
+  background-color: rgb(9, 81, 152);
+}
+.MainImageBox > h1 {
+  font-weight: 500;
+  font-size: 34px;
+  text-align: center;
+  color: white;
+  margin: 50px 0;
+}
+
+.ImageBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  overflow: auto;
+  flex-direction: row;
+  width: 90%;
+  margin: auto;
+  background-color: rgb(9, 81, 152);
+  transition: all 300ms ease-in-out;
+}
+
+/* .Combody */
+
+.Combody {
+  width: 340px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 20px;
+}
+.Imagebody {
+  width: 315px;
+  display: flex;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+.Imagebody > img {
+  height: 60px;
+  width: 60px;
+  border: 5px solid rgb(233, 141, 66);
+  border-radius: 40px;
+}
+.Imagebody > h3 {
+  margin-left: 60px;
+  margin-top: 20px;
+}
+#twitter {
+  width: 30px;
+  height: 30px;
+  margin-left: 90px;
+  border-radius: 25px;
+}
+.C-head {
+  color: #222;
+  font-size: 16px;
+}
+.C-des {
+  color: rgb(34, 34, 34);
+}
+
+/* third div */
+
+.dots {
+  height: 608px;
+  width: 100%;
+  position: absolute;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAF0lEQVQYV2NkQAKMULYvAwPDZhgHLAYAD6kBBEMDSU4AAAAASUVORK5CYII="),
+    linear-gradient(315deg, transparent, rgb(31, 31, 31)),
+    linear-gradient(135deg, transparent, rgb(22, 22, 22));
+}
+
+.Middiv {
+  margin-top: -10px;
+  height: 608px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 120%;
+  background-position: center;
+  background-image: url("https://static.frontendmasters.com/assets/fm/js/bg2.c89a0cad3a.jpg");
+}
+.onmiddiv > h1 {
+  margin-top: 5%;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.MidData {
+  color: white;
+  display: flex;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
+.MidData > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.MidData > div > h1 {
+  border: 4px solid greenyellow;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+.MidData > div > h3 {
+  color: rgb(233, 231, 131);
+}
+.MidData > div > p {
+  align-items: center;
+  margin: auto;
+  width: 60%;
+}
+
+.MidButton {
+  margin: auto;
+  width: 350px;
+  border-radius: 30px;
+  text-align: center;
+  height: 40px;
+  background-color: rgb(201, 79, 23);
+  margin-top: 20px;
+  padding: 10px;
+}
+.linkss {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  margin-top: -5px;
+}
+.MidButton:hover {
+  background-color: rgb(192, 97, 53);
+}
+.linksss {
+  color: rgb(229, 132, 128);
+  font-size: 20px;
+}
+
+/* fourthdiv */
+
+.fourthdiv {
+  text-align: center;
+  font-size: 20px;
+  width: 100%;
+  background-image: linear-gradient(315deg, transparent, rgb(230, 216, 216)),
+    linear-gradient(135deg, transparent, rgb(200, 211, 44));
+}
+
+.fourthdiv > h2 {
+  padding-top: 40px;
+  color: gray;
+}
+
+.fourthdiv > h1 > span:nth-child(1) {
+  color: black;
+}
+.fourthdiv > h1 > span:nth-child(2) {
+  color: blueviolet;
+}
+
+.fourthdiv > p {
+  margin: auto;
+  width: 60%;
+  font-size: 25px;
+}
+.fourthdiv > p:nth-child(5) {
+  padding-bottom: 40px;
+}
+
+.fourthdiv > img {
+  width: 50%;
+  height: 500px;
+}
