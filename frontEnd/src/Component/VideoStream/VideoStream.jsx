@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAot6COr6pX-qPc3vg4Wq_xGe2nq6IQurQ",
