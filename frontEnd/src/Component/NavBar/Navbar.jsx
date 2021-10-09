@@ -8,6 +8,7 @@ import { cardBgColor } from "../Colors/colors";
 
 function Navbar() {
   const { state } = useContext(userContext);
+  console.log("state:", state);
 
   return (
     <div className={styles.Navbody}>

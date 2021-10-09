@@ -1,33 +1,32 @@
-import React, { useEffect } from 'react'
-import {useSelector, shallowEqual, useDispatch} from 'react-redux'
-import { GetLoggedData } from '../../Redux/action';
-import { GetData } from '../../Utils/LocalStorageData';
-import {TextField, Box, Grid} from '@material-ui/core';
-import styled from 'styled-components';
-import { DetailSection } from './DetailSection';
-import { RightCarousel } from './RightCarousel';
-import { BottomPart } from './BottomPart';
-
-
+import React, { useEffect } from "react";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { GetLoggedData } from "../../Redux/action";
+import { GetData } from "../../Utils/LocalStorageData";
+import { Box, Grid } from "@material-ui/core";
+import styled from "styled-components";
+import { DetailSection } from "./DetailSection";
+import { RightCarousel } from "./RightCarousel";
+import { BottomPart } from "./BottomPart";
 
 export const Profile = () => {
-    const dispatch = useDispatch()
-    const { data, loggedData, isLoading, isError } = useSelector(
-        (state) => state.homeReducer,
-        shallowEqual
-    );
-      
-    useEffect(()=>{
-      const loggedUser = GetData("loginData")
-      const id = loggedUser._id
-      userInfo(id)
-    },[])
+  const dispatch = useDispatch();
+  const { loggedData } = useSelector(
+    (state) => state.homeReducer,
+    shallowEqual
+  );
 
-    const userInfo = (id) =>{
-       dispatch(GetLoggedData(id))
-    }
+  useEffect(() => {
+    const loggedUser = GetData("loginData");
+    const id = loggedUser._id;
+    userInfo(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    console.log(loggedData, "loginData");
+  const userInfo = (id) => {
+    dispatch(GetLoggedData(id));
+  };
+
+  console.log(loggedData, "loginData");
   return (
     <>
     <div>
@@ -49,8 +48,8 @@ export const Profile = () => {
     </MainContainer>
     </div>
     </>
-  )
-}
+  );
+};
 
 const MainContainer = styled.div`
   /* width:100%; */
@@ -60,16 +59,16 @@ const MainContainer = styled.div`
     padding:8% 2%;
   }
 
-  & .grid-cont{
+  & .grid-cont {
   }
 
   & .grid-item1{
     position: relative;
 
   }
-  & .grid-item2{
+  & .grid-item2 {
     /* border:1px solid blue; */
-    max-width:500px;
+    max-width: 500px;
   }
   & .grid-item{
     position:relative;
