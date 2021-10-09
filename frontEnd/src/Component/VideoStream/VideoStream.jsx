@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAot6COr6pX-qPc3vg4Wq_xGe2nq6IQurQ",
@@ -33,18 +33,31 @@ const servers = {
 };
 const pc = new RTCPeerConnection(servers);
 
-export function VideoStream({ link }) {
+export function VideoStream({ link, page }) {
   const [currentPage, setCurrentPage] = useState("home");
-  const [joinCode, setJoinCode] = useState("");
+  const [joinCode, setJoinCode] = useState(link);
+  // setJoinCode(link);
+  console.log(page, link, "link");
 
   useEffect(() => {
-    return () => {
-      firestore.collection("isActive").doc("isActive123").update({
-        active: false,
-        link: "",
+    firestore
+      .collection("isActive")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach(async (doc) => {
+          let val = await doc.data();
+          console.log("firestore val", val);
+          setJoinCode(val.link);
+          console.log("fr ue", val.link);
+        });
       });
-    };
-  });
+    // return () => {
+    //   firestore.collection("isActive").doc("isActive123").update({
+    //     active: false,
+    //     link: "",
+    //   });
+    // };
+  }, []);
 
   return (
     <div className="app">
@@ -60,13 +73,14 @@ export function VideoStream({ link }) {
           mode={currentPage}
           callId={joinCode}
           setPage={setCurrentPage}
+          page={page}
         />
       )}
     </div>
   );
 }
 
-function Menu({ joinCode, setJoinCode, setPage }) {
+function Menu({ joinCode, setJoinCode, setPage, page }) {
   return (
     <div>
       <div>
@@ -76,7 +90,7 @@ function Menu({ joinCode, setJoinCode, setPage }) {
             //  setupSources();
           }}
         >
-          Create Call
+          ready to hustle
         </button>
       </div>
 
@@ -164,8 +178,9 @@ function Videos({ mode, callId, setPage, link }) {
           }
         });
       });
-    } else if (mode === "join") {
-      const callDoc = firestore.collection("calls").doc(link);
+    } else {
+      console.log("injoind");
+      const callDoc = firestore.collection("calls").doc(callId);
       const answerCandidates = callDoc.collection("answerCandidates");
       const offerCandidates = callDoc.collection("offerCandidates");
 
@@ -202,13 +217,18 @@ function Videos({ mode, callId, setPage, link }) {
 
     pc.onconnectionstatechange = (event) => {
       if (pc.connectionState === "disconnected") {
-        hangUp();
+        handleHandUp();
       }
     };
   };
 
-  const hangUp = async () => {
+  const handleHandUp = async () => {
     pc.close();
+
+    firestore.collection("isActive").doc("isActive123").update({
+      active: false,
+      link: "",
+    });
 
     if (roomId) {
       let roomRef = firestore.collection("calls").doc(roomId);
@@ -251,11 +271,16 @@ function Videos({ mode, callId, setPage, link }) {
       <video width="900" ref={remoteRef} autoPlay playsInline />
 
       <div>
-        <button onClick={hangUp} disabled={!webcamActive}></button>
+        <button onClick={handleHandUp} disabled={!webcamActive}></button>
         <div>
           <div>
-            <input type="text" value={roomId} />
+            <input
+              onChange={(e) => setRoomId(e.target.value)}
+              type="text"
+              value={roomId}
+            />
           </div>
+          <button onClick={handleHandUp}>Hang Up</button>
         </div>
       </div>
 

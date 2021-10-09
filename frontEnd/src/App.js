@@ -29,8 +29,8 @@ function App() {
     db.collection("isActive")
       .get()
       .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          let val = doc.data();
+        snapshot.docs.forEach(async (doc) => {
+          let val = await doc.data();
           console.log("firestore val", val);
           if (val.active === false) {
             setPage("create");
