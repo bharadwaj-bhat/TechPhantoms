@@ -41,18 +41,7 @@ function Navbar() {
           </Hover>
           <Hover>
             {state ? (
-              <button
-                style={{
-                  borderRadius: "30px",
-                  width: "100px",
-                  border: "none",
-                  backgroundColor: "rgb(192,45,40)",
-                  marginTop: "-9px",
-                  height: "40px",
-                  paddingTop: "5px",
-                  cursor: "pointer",
-                }}
-              >
+              <button className="buttonlink">
                 <Link
                   to="/logout"
                   style={{
@@ -67,18 +56,7 @@ function Navbar() {
                 </Link>
               </button>
             ) : (
-              <button
-                style={{
-                  borderRadius: "30px",
-                  width: "100px",
-                  border: "none",
-                  backgroundColor: "rgb(192,45,40)",
-                  marginTop: "-9px",
-                  height: "40px",
-                  paddingTop: "5px",
-                  cursor: "pointer",
-                }}
-              >
+              <button className="buttonlink">
                 <Link
                   to="/login"
                   style={{
@@ -97,11 +75,16 @@ function Navbar() {
         </div>
       </Navbars>
       <svg
-        style={{ height: "70", width: "100%", zIndex: "1", marginTop: "7px" }}
+        style={{
+          height: "70px",
+          width: "100%",
+          zIndex: "1",
+          marginTop: "-2px",
+        }}
       >
         <polygon
           points="-300,0 1400,-30 1700,20"
-          style={{ fill: "#e91d1d", stroke: "none", strokeWidth: "1" }}
+          style={{ fill: "#c76767", stroke: "none", strokeWidth: "1" }}
         />
       </svg>
     </div>

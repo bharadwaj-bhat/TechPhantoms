@@ -3,10 +3,11 @@ import "./Homepage.css";
 import video from "./hero.mp4";
 import { Subjectimg, twiter } from "./Localdata";
 import { Link } from "react-router-dom";
+import img from "./img.png";
 
 function Home() {
   return (
-    <div>
+    <div className="mainbox">
       <div
         style={{
           position: "relative",
@@ -37,7 +38,7 @@ function Home() {
       <div>
         <svg
           style={{
-            height: "70",
+            height: "70px",
             width: "100%",
             zIndex: "5",
             marginBottom: "6px",
@@ -45,7 +46,7 @@ function Home() {
         >
           <polygon
             points="0,60 0,30 1700,60"
-            style={{ fill: "#0a0a0a", stroke: "none", strokeWidth: "1" }}
+            style={{ fill: "#c76767", stroke: "none", strokeWidth: "1" }}
           />
         </svg>
       </div>
@@ -77,6 +78,16 @@ function Home() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div>
+        <img
+          src={img}
+          alt="img"
+          style={{
+            marginLeft: "8vw",
+          }}
+        />
       </div>
 
       {/* third */}
