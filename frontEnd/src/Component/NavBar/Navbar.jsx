@@ -2,14 +2,15 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { userContext } from "../../App";
+import styles from "./Navbar.module.css";
 
-import "./Navbar.css";
+// import "./Navbar.css";
 
 function Navbar() {
   const { state } = useContext(userContext);
 
   return (
-    <div className="Navbody">
+    <div className={styles.Navbody}>
       <Navbars>
         <Link to="/">
           <img height="40px" src="" alt="LOGO" />
@@ -25,23 +26,23 @@ function Navbar() {
           }}
         >
           <Hover>
-            <Link to="/profile" className="links">
+            <Link to="/profile" className={styles.links}>
               Dashboard
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Learn
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Guides
             </Link>
           </Hover>
           <Hover>
             {state ? (
-              <button className="buttonlink">
+              <button className={styles.buttonlink}>
                 <Link
                   to="/logout"
                   style={{
@@ -56,7 +57,7 @@ function Navbar() {
                 </Link>
               </button>
             ) : (
-              <button className="buttonlink">
+              <button className={styles.buttonlink}>
                 <Link
                   to="/login"
                   style={{

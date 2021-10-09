@@ -1,5 +1,5 @@
 import React from "react";
-import "./Homepage.css";
+import styles from "./Homepage.module.css";
 import video from "./hero.mp4";
 import { Subjectimg, twiter } from "./Localdata";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import img from "./img.png";
 
 function Home() {
   return (
-    <div className="mainbox">
+    <div className={styles.mainbox}>
       <div
         style={{
           position: "relative",
@@ -21,16 +21,16 @@ function Home() {
         </video>
       </div>
       <div>
-        <div className="Onvideo">
+        <div className={styles.Onvideo}>
           <h1>
-            <strong className="heading">Advance Your Skills</strong>
+            <strong className={styles.heading}>Advance Your Skills</strong>
             <br />
             <span>with In-Depth, Modern</span>
             <br />
             <span>Front-End Engineering</span>
             <br />
             <Link to="/signup">
-              <button className="button">Join Now</button>
+              <button className={styles.button}>Join Now</button>
             </Link>
           </h1>
         </div>
@@ -51,30 +51,30 @@ function Home() {
         </svg>
       </div>
 
-      <div className="Subject-flex">
-        <div className="Subject">
+      <div className={styles.Subjectflex}>
+        <div className={styles.Subject}>
           {Subjectimg.map((el) => (
             <div key={el.id}>
-              <img id="Subimage" src={el.image} alt="logo" />
+              <img id={styles.Subimage} src={el.image} alt="logo" />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="MainImageBox">
+      <div className={styles.MainImageBox}>
         <h1>
           Join thousands of professionals who already use XYZ to ace their
           interviews
         </h1>
 
-        <div className="ImageBox">
+        <div className={styles.ImageBox}>
           {twiter.map((item) => (
-            <div key={item.id} className="Combody">
-              <div className="Imagebody">
+            <div key={item.id} className={styles.Combody}>
+              <div className={styles.Imagebody}>
                 <img src={item.img} alt="" />
-                <h3 className="C-head">{item.name}</h3>
+                <h3 className={styles.Chead}>{item.name}</h3>
               </div>
-              <div className="C-des">{item.des}</div>
+              <div className={styles.Chead}>{item.des}</div>
             </div>
           ))}
         </div>
@@ -91,11 +91,11 @@ function Home() {
       </div>
 
       {/* third */}
-      <div className="Middiv">
-        <div className="dots">
-          <div className="onmiddiv">
+      <div className={styles.Middiv}>
+        <div className={styles.dots}>
+          <div className={styles.onmiddiv}>
             <h1>How Practicing Works</h1>
-            <div className="MidData">
+            <div className={styles.MidData}>
               <div>
                 <h1>1</h1>
                 <h3>Get Paired</h3>
@@ -127,8 +127,8 @@ function Home() {
               </div>
             </div>
 
-            <div className="MidButton">
-              <Link className="linkss" to="/signup">
+            <div className={styles.MidButton}>
+              <Link className={styles.linkss} to="/signup">
                 Join Now
               </Link>
             </div>
@@ -137,7 +137,7 @@ function Home() {
       </div>
 
       {/* fourth */}
-      <div className="fourthdiv">
+      <div className={styles.fourthdiv}>
         <h2>Stop preparing alone</h2>
         <h1>
           <span>Get Real</span> <span>Interview Practice</span>
