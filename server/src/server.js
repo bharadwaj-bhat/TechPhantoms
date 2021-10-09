@@ -6,10 +6,10 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 app.use(cookieParser());
-// const cookieparser = require("cookie-parser");
+const cookieparser = require("cookie-parser");
 
 app.use(express.json());
-// app.use(cookieParser());
+app.use(cookieParser());
 const userSchema = require("./controllers/user.controller");
 const logingRouter = require("./controllers/login.controller");
 const profile = require("./controllers/profile.controller");
