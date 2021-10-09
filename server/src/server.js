@@ -14,8 +14,10 @@ const userSchema = require("./controllers/user.controller");
 const logingRouter = require("./controllers/login.controller");
 const profile = require("./controllers/profile.controller");
 const logout = require("./controllers/logout.controler");
+const  Notification  = require("./pushNotifcation/Notification.js");
 
 app.use(cors());
+
 
 app.use("/users", userSchema);
 app.use("/login", logingRouter);
@@ -24,7 +26,10 @@ app.use("/logout", logout);
 
 const PORT = process.env.SERVER_PORT || 4500;
 
+
+
 app.listen(PORT, async function () {
   await connect();
+
   console.log(`Listning to port ${PORT}`);
 });

@@ -4,12 +4,15 @@ const User = require("../models/user.model");
 require("../config/db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Notification = require("../pushNotifcation/Notification");
 const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     let token;
     const { email, password } = req.body;
     if (!email || !password) {
+      console.log(Notification("Rakesh", "Rakesh notification"))
+      
       return res.status(422).json({ error: "You can't empty the faild" });
     }
 
