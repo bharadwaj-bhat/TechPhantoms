@@ -92,7 +92,7 @@ const Signup = () => {
           </button>
           <hr style={{ "margin-top": "30px" }} />
           <label>
-            <Link to="/login">Login</Link>{" "}
+            <Link to="/login">Login</Link>
           </label>
         </form>
       </div>

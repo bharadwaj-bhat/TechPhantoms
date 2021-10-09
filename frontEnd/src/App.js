@@ -7,27 +7,10 @@ import Navbar from "./Component/NavBar/Navbar";
 import { Profile } from "./Component/Dashbord/Profile";
 import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
+import { Footer } from "./Component/Footer/Footer";
 
 export const userContext = createContext();
-const Routing = () => {
-  return (
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/signup" component={Signup} />
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/profile">
-        <Profile />
-      </Route>
-      <Route path="/logout">
-        <Logout />
-      </Route>
-    </Switch>
-  );
-};
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -36,7 +19,24 @@ function App() {
       <>
         <userContext.Provider value={{ state, dispatch }}>
           <Navbar />
-          <Routing />
+
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/signup" component={Signup} />
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/logout">
+              <Logout />
+            </Route>
+          </Switch>
+          
+          <Footer />
         </userContext.Provider>
       </>
     </BrowserRouter>
