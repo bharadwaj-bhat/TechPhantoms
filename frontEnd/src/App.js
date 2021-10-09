@@ -8,6 +8,7 @@ import { Profile } from "./Component/Dashbord/Profile";
 import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
 import { Footer } from "./Component/Footer/Footer";
+import { VideoStream } from "./Component/VideoStream/VideoStream";
 
 export const userContext = createContext();
 
@@ -34,8 +35,9 @@ function App() {
             <Route path="/logout">
               <Logout />
             </Route>
+            <Route path="/temp" component={VideoStream} />
           </Switch>
-          
+
           <Footer />
         </userContext.Provider>
       </>
