@@ -1,0 +1,29 @@
+.footerbody {
+  background-color: rgb(49, 45, 45);
+  height: 50px;
+  display: flex;
+  color: white;
+}
+
+/* .footerlink {
+  margin: auto;
+  display: flex;
+  width: 80%;
+  padding: 10px;
+} */
+
+.social {
+  margin-left: 10%;
+  padding: 7px;
+}
+svg {
+  color: white;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+p {
+  padding: 13px;
+  margin-left: 40%;
+}
