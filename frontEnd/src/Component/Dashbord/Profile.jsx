@@ -6,7 +6,8 @@ import {TextField, Box, Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import { DetailSection } from './DetailSection';
 import { RightCarousel } from './RightCarousel';
-import { HistoryCarousel } from './HistoryCarousel';
+import { BottomPart } from './BottomPart';
+
 
 
 export const Profile = () => {
@@ -32,15 +33,15 @@ export const Profile = () => {
     <MainContainer>
     <Box className="cont-box" sx={{ flexGrow: 1 }}>
       <Grid className="grid-cont" container spacing={2}>
-        <Grid className="grid-item1" item spacing={2} xs={7}>
-          <DetailSection className="grid-item1-comp" loggedData={loggedData}/>
+        <Grid className="grid-item1" item  xs={7}>
+          <DetailSection loggedData={loggedData}/>
         </Grid>
 
-        <Grid className="grid-item2" item spacing={2} xs={5}>
+        <Grid className="grid-item2" item  xs={5}>
           <RightCarousel />
         </Grid>
-        <Grid className="grid-item" item spacing={2} xs={12}>
-          {/* <HistoryCarousel/> */}
+        <Grid className="grid-item" item  xs={12}>
+          <BottomPart/>
         </Grid>
       </Grid>
     </Box>
@@ -59,16 +60,7 @@ const MainContainer = styled.div`
   }
 
   & .grid-item1{
-    
-    & .grid-item1-comp{
-      display: none;
-  position: relative;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-    }
+    /* text-align:center !important; */
   }
   & .grid-item2{
     /* border:1px solid blue; */

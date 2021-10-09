@@ -9,6 +9,8 @@ import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
 import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
+import "./App.css"
+import { DataForm } from "./Component/SelectField/DataForm";
 
 export const userContext = createContext();
 
@@ -29,6 +31,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/selectField">
+              <DataForm/>
             </Route>
             <Route path="/logout">
               <Logout />

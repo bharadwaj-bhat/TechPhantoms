@@ -11,7 +11,6 @@ const handleTap = () => {
 };
 
 const controls = useAnimation();
-
 const variants = {
 	active: {
 	width: 320,
@@ -19,7 +18,7 @@ const variants = {
 	borderRadius: 0,
 	overflow: "visible",
 	left: 28,
-	right:0,
+	right:10,
 	y: 0,
 	transition: { duration: 0.125,
 					type: "spring",
@@ -28,7 +27,7 @@ const variants = {
 	},
 	inactive: {
 	width: 280,
-	height: 260,
+	height: 280,
 	borderRadius: 24,
 	overflow: "hidden",
 	left: 45,
@@ -41,19 +40,17 @@ const variants = {
 };
 
 return (
-	// basic container for layout, styling,
-	// animation and events.
+
     <div className={styles.abs}>
 	<Frame
 	y={yPos}
 	variants={variants}
 	animate={state ? "active" : "inactive"}
 	width={300}
-	height={200}
+	height={300}
 	borderRadius={24}
 	style={state ? { zIndex: 10 } : { zIndex: 1 }}
 	left={37.5}
-    top={-20}
 	onTap={handleTap}
 	shadow={
 		state
@@ -63,17 +60,19 @@ return (
 	>
 	<Scroll
 		width="100%"
+		color={"#464343"}
 		height="100%"
-		backgroundColor={"#d1d0d6"}
+		backgroundColor={"#d1d0d697"}
 		scrollAnimate={controls}
 	>
         <h2 className={styles.fullnameData}>{fullname}</h2>
 		<Frame
 		position="relative"
-		background="linear-gradient(90deg, #12213a 50%, #1b2f52 50%"
+		background="linear-gradient(90deg, #ffc75f5c 50%, #ee82ee42 50%"
+		// background: linear-gradient(orange, violet);
 		width="100%"
-		height={200}
-        color={"white"}
+		height={300}
+        color={"#464343"}
 		>
             <div className={styles.infoData}>
                 <p className={styles.usernameData}>{`Username:${username}`}</p>
@@ -82,25 +81,26 @@ return (
                 <p>Description</p>
                 <p>{description}</p>
             </div>
-            
+            <hr />
         </Frame>
         <img className={styles.infoImg} src="https://thumbs.dreamstime.com/b/online-education-homepage-e-learning-technology-concept-85876793.jpg" alt="" />
 		<Frame position="relative"
 			height={170}
-            background="linear-gradient(90deg, #12213a 50%, #1b2f52 50%"
-            color={"white"} >
+            background="linear-gradient(90deg, #ffc75f5c 50%, #ee82ee42 50%"
+            color={"#464343"} >
                 <div className={styles.infoData}>
-                    <p>Achievements</p>
+                    <p >Achievements</p>
                     <p>{`Goals: ${goals}`}</p>
                     <p>{`Attended Meet: ${attended}`}</p>
                 </div>
-                <button className={styles.setGoals}>Click here to set Goals</button>
+				<hr />
+                <Button color="primary" variant="contained" className={styles.setGoals}>Click here to set Goals</Button>
             </Frame>
 
 		<Frame
 		top={20}
 		left={20}
-		height={60}
+		height={80}
 		width={""}
 		background={null}
 		style={{
@@ -108,7 +108,7 @@ return (
 			fontFamily: "sans-serif"
 		}}
 		>
-		<Button className={styles.joinNowBtn} color="primary" variant="outlined">Join Now</Button>
+		<Button className={styles.joinNowBtn} color="primary" variant="contained">Join Now</Button>
 		</Frame>
 	</Scroll>
 	{state && (
@@ -117,12 +117,12 @@ return (
 		size={15}
 		top={15}
 		right={20}
-		backgroundColor={"##d1d0d6"}
+		backgroundColor={"#d1d0d697"}
 		onTap={() => {
 			setState(false);
 		}}
 		>
-		<ImCross style={{marginTop:"25px"}} color="black" />
+		<ImCross style={{marginTop:"15px"}} color="#464343" />
 		</Frame>
 	)}
 	</Frame>
@@ -131,3 +131,5 @@ return (
 };
 
 export default Card;
+
+
