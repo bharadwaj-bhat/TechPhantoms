@@ -20,174 +20,237 @@ const firestore = firebase.firestore();
 
 const servers = {
   iceServers: [
+    // {
+    //   urls: "stun:stun.stunptotocol.org",
+    // },
     {
-      urls: ["stun:stun1.l.google.com:19302", "stun:stun2.l.google.come:19302"],
+      urls: "turn:numb.viagenie.ca",
+      credential: "muazkh",
+      username: "webrtc@live.com",
     },
   ],
-  iceCandidatePoolSize: 10,
+  // iceCandidatePoolSize: 10,
 };
+const pc = new RTCPeerConnection(servers);
 
-export const VideoStream = () => {
-  // const [connection, setConnection] = useState("");
-
-  const [callInp, setCallInp] = useState("");
-  const connection = useRef();
-  const myVideo = useRef();
-  const peerVideo = useRef();
-  const localStream = useRef();
-  const remoteStream = useRef();
-
-  useEffect(() => {
-    connection.current = new RTCPeerConnection(servers);
-    console.log("connection.current", connection.current);
-  }, []);
-
-  const handleCam = async () => {
-    localStream.current = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false,
-    });
-
-    remoteStream.current = new MediaStream();
-
-    console.log("lcoal", localStream);
-
-    console.log(connection.current);
-
-    localStream.current.getTracks().forEach((track) => {
-      connection.current.addTrack(track, localStream.current);
-    });
-
-    connection.current.ontrack = (event) => {
-      event.streams[0].getTracks().forEach((track) => {
-        remoteStream.current.addTrack(track);
-      });
-    };
-
-    myVideo.current.srcObject = localStream.current;
-    peerVideo.current.srcObject = remoteStream.current;
-  };
-
-  // create call
-  const handleCall = async () => {
-    const callDoc = firestore.collection("calls").doc();
-    console.log(callDoc);
-    const offerCandidates = callDoc.collection("offercandidates");
-    const answerCandidates = callDoc.collection("answerCandidates");
-    setCallInp(callDoc.id);
-    console.log(console.log(callDoc.id));
-
-    connection.current.onicecandidate = (e) => {
-      e.candidate && offerCandidates.add(e.candidate.toJSON());
-    };
-
-    const offerDescription = await connection.current.createOffer();
-    await connection.current.setLocalDescription(offerDescription);
-
-    const offer = {
-      sdp: offerDescription.sdp,
-      type: offerDescription.type,
-    };
-
-    await callDoc.set({ offer });
-
-    callDoc.onSnapshot(async (snapshot) => {
-      const data = snapshot.data();
-      if (!connection.current.currentRemoteDescription && data?.answer) {
-        const answerDescription = new RTCSessionDescription(data.answer);
-        await connection.current.setRemoteDescription(answerDescription);
-      }
-    });
-
-    answerCandidates.onSnapshot((snapshot) => {
-      console.log("inside crt snap");
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-          const candidate = new RTCIceCandidate(change.doc.data());
-          connection.current.addIceCandidate(candidate);
-        }
-      });
-    });
-  };
-  //---------------------------------------------------------------------------------------------------------
-
-  const handleAnswerCall = async () => {
-    console.log("1");
-    const callId = callInp;
-    const callDoc = firestore.collection("calls").doc(callId);
-    const answerCandidates = callDoc.collection("answerCandidates");
-    const offerCandidates = callDoc.collection("offerCandidates");
-    console.log("2");
-    connection.current.onicecandidate = (event) => {
-      event.candidate && answerCandidates.add(event.candidate.toJSON());
-    };
-
-    const callData = (await callDoc.get()).data();
-    console.log("3", callData);
-    const offerDescription = callData.offer;
-
-    await connection.current.setRemoteDescription(offerDescription);
-
-    const answerDescription = await connection.current.createAnswer();
-    await connection.current.setLocalDescription(answerDescription);
-    console.log("4", answerDescription);
-    const answer = {
-      type: answerDescription.type,
-      sdp: answerDescription.sdp,
-    };
-
-    await callDoc.update({ answer });
-
-    // connection.current.addEventListener('icecandidate', event => {
-    //   if (event.candidate) {
-    //     const json = event.condidate.toJSON();
-    //     candidatesCollection.add(json)
-    //   }
-    // })
-
-    offerCandidates.onSnapshot((snapshot) => {
-      console.log("in snap");
-      snapshot.docChanges().forEach((change) => {
-        console.log("change", change);
-        if (change.type === "added") {
-          let data = change.doc.data();
-          console.log(data);
-          connection.current.addIceCandidate(new RTCIceCandidate(data));
-        }
-      });
-    });
-
-    console.log("exiting");
-  };
+export function VideoStream() {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [joinCode, setJoinCode] = useState("");
 
   return (
-    <div style={{ width: "50%", margin: "auto" }}>
-      <button onClick={handleCam}> Open web Cam </button>
+    <div className="app">
+      {currentPage === "home" ? (
+        <Menu
+          joinCode={joinCode}
+          setJoinCode={setJoinCode}
+          setPage={setCurrentPage}
+        />
+      ) : (
+        <Videos mode={currentPage} callId={joinCode} setPage={setCurrentPage} />
+      )}
+    </div>
+  );
+}
 
+function Menu({ joinCode, setJoinCode, setPage }) {
+  return (
+    <div>
       <div>
-        <h2> Your Own web Cam </h2>
-        <video ref={myVideo} autoPlay playsInline></video>
+        <button
+          onClick={() => {
+            setPage("create");
+            //  setupSources();
+          }}
+        >
+          Create Call
+        </button>
       </div>
 
-      <div>
-        <h2> YOur Peer's web Cam</h2>
-        <video ref={peerVideo} autoPlay playsInline></video>
-      </div>
-      <div>
-        <button onClick={handleCall}> Create a new call </button>
-        <br />
-      </div>
       <div>
         <input
-          type="text"
-          name=""
-          id=""
-          placeholder="Join A Call"
-          onChange={(e) => setCallInp(e.target.value)}
-          value={callInp}
+          value={joinCode}
+          onChange={(e) => setJoinCode(e.target.value)}
+          placeholder="Join with code"
         />
-        <button onClick={handleAnswerCall}>Answer call </button>
+        <button onClick={() => setPage("join")}>Answer</button>
       </div>
     </div>
   );
-};
+}
+
+function Videos({ mode, callId, setPage }) {
+  const [webcamActive, setWebcamActive] = useState(false);
+  const [roomId, setRoomId] = useState(callId);
+
+  const localRef = useRef();
+  const remoteRef = useRef();
+
+  var setupSources = async () => {
+    const localStream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
+    });
+    const remoteStream = new MediaStream();
+
+    localStream.getTracks().forEach((track) => {
+      pc.addTrack(track, localStream);
+    });
+
+    console.log("ls", localStream);
+    pc.ontrack = (event) => {
+      event.streams[0].getTracks().forEach((track) => {
+        remoteStream.addTrack(track);
+      });
+    };
+
+    localRef.current.srcObject = localStream;
+    remoteRef.current.srcObject = remoteStream;
+
+    setWebcamActive(true);
+
+    if (mode === "create") {
+      const callDoc = firestore.collection("calls").doc();
+      const offerCandidates = callDoc.collection("offerCandidates");
+      const answerCandidates = callDoc.collection("answerCandidates");
+
+      setRoomId(callDoc.id);
+
+      pc.onicecandidate = (event) => {
+        event.candidate && offerCandidates.add(event.candidate.toJSON());
+      };
+
+      const offerDescription = await pc.createOffer();
+      await pc.setLocalDescription(offerDescription);
+
+      const offer = {
+        sdp: offerDescription.sdp,
+        type: offerDescription.type,
+      };
+
+      await callDoc.set({ offer });
+
+      callDoc.onSnapshot((snapshot) => {
+        const data = snapshot.data();
+        if (!pc.currentRemoteDescription && data?.answer) {
+          const answerDescription = new RTCSessionDescription(data.answer);
+          pc.setRemoteDescription(answerDescription);
+        }
+      });
+
+      answerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            const candidate = new RTCIceCandidate(change.doc.data());
+            pc.addIceCandidate(candidate);
+          }
+        });
+      });
+    } else if (mode === "join") {
+      const callDoc = firestore.collection("calls").doc(callId);
+      const answerCandidates = callDoc.collection("answerCandidates");
+      const offerCandidates = callDoc.collection("offerCandidates");
+
+      pc.onicecandidate = (event) => {
+        event.candidate && answerCandidates.add(event.candidate.toJSON());
+      };
+
+      const callData = (await callDoc.get()).data();
+
+      const offerDescription = callData.offer;
+      await pc.setRemoteDescription(
+        new RTCSessionDescription(offerDescription)
+      );
+
+      const answerDescription = await pc.createAnswer();
+      await pc.setLocalDescription(answerDescription);
+
+      const answer = {
+        type: answerDescription.type,
+        sdp: answerDescription.sdp,
+      };
+
+      await callDoc.update({ answer });
+
+      offerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            let data = change.doc.data();
+            pc.addIceCandidate(new RTCIceCandidate(data));
+          }
+        });
+      });
+    }
+
+    pc.onconnectionstatechange = (event) => {
+      if (pc.connectionState === "disconnected") {
+        hangUp();
+      }
+    };
+  };
+
+  const hangUp = async () => {
+    pc.close();
+
+    if (roomId) {
+      let roomRef = firestore.collection("calls").doc(roomId);
+      await roomRef
+        .collection("answerCandidates")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.delete();
+          });
+        });
+      await roomRef
+        .collection("offerCandidates")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.delete();
+          });
+        });
+
+      await roomRef.delete();
+    }
+
+    window.location.reload();
+  };
+
+  return (
+    <div style={{ maxWidth: "80vw", margin: "auto" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: "80px",
+          left: "130px",
+          zIndex: 5,
+        }}
+      >
+        <video width="320" ref={localRef} autoPlay playsInline muted />
+      </div>
+      <div style={{ width: "100%", margin: "auto" }}></div>
+      <video width="900" ref={remoteRef} autoPlay playsInline />
+
+      <div>
+        <button onClick={hangUp} disabled={!webcamActive}></button>
+        <div>
+          <div>
+            <input type="text" value={roomId} />
+          </div>
+        </div>
+      </div>
+
+      {!webcamActive && (
+        <div>
+          <div>
+            <h3>Turn on your camera and microphone and start the call</h3>
+            <div>
+              <button onClick={() => setPage("home")}>Cancel</button>
+              <button onClick={setupSources}>Start</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
