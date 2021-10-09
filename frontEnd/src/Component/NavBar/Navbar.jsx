@@ -8,6 +8,7 @@ import styles from "./Navbar.module.css";
 
 function Navbar() {
   const { state } = useContext(userContext);
+  console.log("state:", state);
 
   return (
     <div className={styles.Navbody}>
