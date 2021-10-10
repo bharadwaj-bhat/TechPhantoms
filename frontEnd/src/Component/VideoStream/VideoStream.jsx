@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import Draggable from "react-draggable";
 import { flexbox } from "@mui/system";
+import { Button } from "@material-ui/core";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAot6COr6pX-qPc3vg4Wq_xGe2nq6IQurQ",
@@ -97,31 +98,32 @@ function Menu({ joinCode, setJoinCode, setPage, page }) {
     <div>
       <div
         style={{
-          position: "absolute",
-          top: "100px",
+          position: "relative",
+          top: "10px",
           left: "630px",
           color: "white",
           fontSize: "1.1rem",
         }}
       >
         {joinCode !== "" ? (
-          <button
+          <Button
             style={{
               border: "none",
               padding: "15px 25px",
-              background: "black",
+              margin:"35vh auto",
+              background: "#26168bc1",
               color: "white",
             }}
             onClick={() => setPage("join")}
           >
             Get Started
-          </button>
+          </Button>
         ) : (
           <button
             style={{
               border: "none",
               padding: "15px 25px",
-              background: "black",
+              backgroundColor:"black",
               color: "white",
             }}
             onClick={() => {
@@ -301,8 +303,8 @@ function Videos({ mode, callId, setPage, link }) {
   };
 
   return (
-    <div style={{ maxWidth: "100vw", background: "black" }}>
-      <button onClick={() => setChatIsOpen(true)}> TEMPPP </button>
+    <div style={{ maxWidth: "100vw", background:"linear-gradient(90deg, #e6be7676 50%, #db6bdb61 50%" }}>
+      {/* <button onClick={() => setChatIsOpen(true)}> TEMPPP </button> */}
 
       <Draggable>
         <div
@@ -381,34 +383,36 @@ function Videos({ mode, callId, setPage, link }) {
               boder: "1px solid red",
             }}
           >
-            <h3 style={{ color: "white" }}>
+            <h2>
               Allow camera access and click start
-            </h3>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <button
+            </h2>
+            <div style={{ display: "flex", alignItems:"center"}}>
+              <Button
+              variant="contained"
+              color="secondary"
                 style={{
                   border: "none",
                   padding: "15px 25px",
-                  background: "white",
-                  color: "black",
-                  marginRight: "4px",
+                  marginRight: "1%",
+                  marginLeft:"20%"
                 }}
                 onClick={() => setPage("home")}
               >
                 Cancel
-              </button>
+              </Button>
 
-              <button
+              <Button
+              variant="contained"
+              color="primary"
                 style={{
                   border: "none",
                   padding: "15px 25px",
-                  background: "white",
-                  color: "black",
+                  marginLeft:"1%"
                 }}
                 onClick={setupSources}
               >
                 Start
-              </button>
+              </Button>
             </div>
           </div>
         </div>

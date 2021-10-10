@@ -72,6 +72,7 @@ function App() {
     <>
       <userContext.Provider value={{ state, dispatch }}>
         <Navbar />
+
         <Switch>
           <Route exact path="/">
             <Home />
@@ -92,7 +93,7 @@ function App() {
           <Route path="/chat" exact>
             <Chat />
           </Route>
-          <Route path="/temp">
+          <Route exact path="/temp">
             <VideoStream />
           </Route>
         </Switch>
