@@ -23,17 +23,12 @@ function App() {
     <>
       <userContext.Provider value={{ state, dispatch }}>
         <Navbar />
-
-       
-
         <Switch>
           <Route exact path="/">
             <Home />
-         
-              
           </Route>
-          <Route path="/signup" component={Signup} />
-          <Route path="/login">
+          {/* <Route path="/signup" component={Signup} /> */}
+          <Route exact path="/login">
             <Login />
           </Route>
           <Route path="/profile">
@@ -48,11 +43,8 @@ function App() {
           <Route path = "/chat" exact>
             <Chat/>
           </Route>
-         
           <Route path="/temp">
-            
             <VideoStream />
-    
             </Route>
         </Switch>
 

@@ -1,14 +1,32 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link,useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { userContext } from "../../App";
 import styles from "./Navbar.module.css";
 import { cardBgColor } from "../Colors/colors";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { GetData } from "../../Utils/LocalStorageData";
+import { GetLoggedData } from "../../Redux/action";
 // import "./Navbar.css";
 
 function Navbar() {
-  const { state } = useContext(userContext);
-  console.log("state:", state);
+  const history = useHistory()
+  const dispatch = useDispatch()
+  // const { state } = useContext(userContext);
+  // console.log("state:", state);
+const [state,setState] = useState(false)
+  const { loggedData } = useSelector(
+    (state) => state.homeReducer,
+    shallowEqual
+  );
+const temp = loggedData._id
+  // useEffect(()=>{
+  //   setState()
+  // },[])
+
+  const handleLogout = (e)=>{
+    history.push("/login")
+  }
 
   return (
     <div className={styles.Navbody}>
@@ -27,9 +45,11 @@ function Navbar() {
           }}
         >
           <Hover>
-            <Link to="/profile" className={styles.links}>
+            
+            <Link to={(temp?"/profile":"/login")} className={styles.links}>
               Dashboard
             </Link>
+        
           </Hover>
           <Hover>
             <Link to="#" className={styles.links}>
@@ -42,21 +62,18 @@ function Navbar() {
             </Link>
           </Hover>
           <Hover>
-            {state ? (
-              <button className={styles.buttonlink}>
-                <Link
-                  to="/logout"
-                  style={{
+            {temp ? (
+              <form >
+              <button 
+               className={styles.buttonlink}
+               style={{
                     fontWeight: "500",
                     fontSize: "16px",
                     textDecoration: "none",
                     fontFamily: "'Open Sans', sans-serif",
                     color: "white",
-                  }}
-                >
-                  Logout
-                </Link>
-              </button>
+                  }} type="submit" onClick={(e)=>handleLogout(e)}>logout</button>
+              </form>
             ) : (
               <button className={styles.buttonlink}>
                 <Link

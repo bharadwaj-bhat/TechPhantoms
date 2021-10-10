@@ -22,16 +22,18 @@ function Home() {
       </div>
       <div>
         <div className={styles.Onvideo}>
-          <h1>
+          <h1 className={styles.contHeading}>
             <strong className={styles.heading}>Advance Your Skills</strong>
             <br />
             <span>with In-Depth, Modern</span>
             <br />
             <span>Front-End Engineering</span>
             <br />
+            <div>
             <Link to="/signup">
               <button className={styles.button}>Join Now</button>
             </Link>
+            </div>
           </h1>
         </div>
       </div>
@@ -85,7 +87,7 @@ function Home() {
           src={img}
           alt="img"
           style={{
-            marginLeft: "8vw",
+            // marginLeft: "8vw",
           }}
         />
       </div>
