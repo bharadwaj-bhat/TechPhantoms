@@ -56,7 +56,7 @@ const MainContainer = styled.div`
   /* margin:500px auto; */
 
   & .cont-box{
-    padding:8% 2%;
+    padding:2% 2%;
   }
 
   & .grid-cont {
