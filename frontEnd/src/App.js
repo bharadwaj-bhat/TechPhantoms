@@ -11,6 +11,7 @@ import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
 import "./App.css";
 import { DataForm } from "./Component/SelectField/DataForm";
+import { Chat } from "./Component/Chat/Chat";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -89,8 +90,12 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
-          <Route path="/video">
-            <VideoStream setChatIsOpen={setChatIsOpen} />
+          <Route path="/chat" exact>
+            <Chat />
+          </Route>
+
+          <Route path="/temp">
+            <VideoStream />
           </Route>
         </Switch>
         {/* <Footer /> */}
