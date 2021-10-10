@@ -36,7 +36,7 @@ const servers = {
 };
 const pc = new RTCPeerConnection(servers);
 
-export function VideoStream({ link, page = "create" }) {
+export function VideoStream({ link, page = "create", setChatIsOpen }) {
   const [currentPage, setCurrentPage] = useState("home");
   const [joinCode, setJoinCode] = useState(link);
   // setJoinCode(link);
@@ -85,6 +85,7 @@ export function VideoStream({ link, page = "create" }) {
           callId={joinCode}
           setPage={setCurrentPage}
           page={page}
+          setChatIsOpen={setChatIsOpen}
         />
       )}
     </div>
@@ -148,10 +149,16 @@ function Videos({ mode, callId, setPage, link }) {
   const [webcamActive, setWebcamActive] = useState(false);
   const [roomId, setRoomId] = useState(callId);
 
+  const [chatIsOpen, setChatIsOpen] = useState(false);
+
+  useEffect(() => {
+    console.log("sldk");
+  });
+
   const localRef = useRef();
   const remoteRef = useRef();
 
-  var setupSources = async () => {
+  var setupSources = async ({ setChatIsOpen }) => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
@@ -295,6 +302,8 @@ function Videos({ mode, callId, setPage, link }) {
 
   return (
     <div style={{ maxWidth: "100vw", background: "black" }}>
+      <button onClick={() => setChatIsOpen(true)}> TEMPPP </button>
+
       <Draggable>
         <div
           style={{
@@ -317,12 +326,12 @@ function Videos({ mode, callId, setPage, link }) {
           overflow: "hidden",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-around",
           height: "50px",
         }}
       ></div>
       <video height="auto" width="100%" ref={remoteRef} autoPlay playsInline />
-
+      {chatIsOpen && <div>chat div</div>}
       <div>
         <div>
           <div>

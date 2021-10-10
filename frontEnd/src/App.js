@@ -61,7 +61,11 @@ function App() {
   //   );
   // }
 
+  const [chatIsOpen, setChatIsOpen] = useState(false);
+
   console.log("state:", state);
+
+  let width = chatIsOpen ? "60%" : "100%";
 
   return (
     <>
@@ -85,10 +89,13 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
+          <Route path="/video">
+            <VideoStream setChatIsOpen={setChatIsOpen} />
+          </Route>
         </Switch>
         {/* <Footer /> */}
+        {/* <Route exact path="/temp" component={VideoStream} /> */}
       </userContext.Provider>
-      <Route exact path="/temp" component={VideoStream} />
     </>
   );
 }
