@@ -5,14 +5,30 @@ import "./chatContent.css";
 import { ChatItem } from "./ChatItem.js";
 import axios from 'axios';
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { GetData } from "../../../Utils/LocalStorageData.jsx";
+import { GetLoggedData } from "../../../Redux/action.jsx";
 
   // const [message'esEndRef] = useRef(null);
  
 export const ChatContent = (props)=> {
+  const dispatch = useDispatch();
 
-  
+  const { loggedData } = useSelector(
+    (state) => state.homeReducer,
+    shallowEqual
+  );
 
- 
+  useEffect(() => {
+    const loggedUser = GetData("loginData");
+    const id = loggedUser._id;
+    userInfo(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const userInfo = (id) => {
+    dispatch(GetLoggedData(id));
+  };
+
   
   const [chat, setChat] =  useState([]);
   const [message , setMessage] = useState("");
@@ -77,10 +93,8 @@ export const ChatContent = (props)=> {
     useEffect(()=>{
 
     //  const name = prompt("enter the name");
-
-    //  setUserName((e)=> {
-    //    return (e = name)
-    //  })
+    const fullname = loggedData.fullname
+     setUserName(fullname)
    
     
 
@@ -139,7 +153,7 @@ export const ChatContent = (props)=> {
                 /> */}
 
                 <h3 style = {{margin: 0}}>Chat room</h3>
-                <p style = {{margin: 0}}>user: - {userName}</p>
+                <p style = {{margin: 0}}>user:   {userName}</p>
                 
               </div>
               
