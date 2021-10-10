@@ -3,8 +3,11 @@ import "firebase/firestore";
 import { useState, useRef, useEffect } from "react";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import Draggable from "react-draggable";
+import { Box, Button, Input, Modal, Popper, Typography } from "@material-ui/core";
 import { flexbox } from "@mui/system";
-import { Button } from "@material-ui/core";
+import { Redirect, useHistory } from "react-router";
+import styled from 'styled-components'
+import { Chat } from "../Chat/Chat";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAot6COr6pX-qPc3vg4Wq_xGe2nq6IQurQ",
@@ -41,6 +44,8 @@ export function VideoStream({ link, page = "create", setChatIsOpen }) {
   const [currentPage, setCurrentPage] = useState("home");
   const [joinCode, setJoinCode] = useState(link);
   // setJoinCode(link);
+
+  
   console.log(page);
 
   useEffect(() => {
@@ -147,15 +152,38 @@ function Menu({ joinCode, setJoinCode, setPage, page }) {
   );
 }
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "40%",
+  // height: "60%",
+  bgcolor: "background.none",
+  boxShadow: "none",
+  p: 0,
+  borderRadius: "10px",
+};
+
 function Videos({ mode, callId, setPage, link }) {
+  const history = useHistory()
   const [webcamActive, setWebcamActive] = useState(false);
   const [roomId, setRoomId] = useState(callId);
 
   const [chatIsOpen, setChatIsOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("sldk");
-  });
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    console.log("pallav");
+    setOpen(false);
+  };
+
+  const handleOpen = () =>{
+    console.log('open');
+    setOpen(true)
+  }
 
   const localRef = useRef();
   const remoteRef = useRef();
@@ -343,14 +371,16 @@ function Videos({ mode, callId, setPage, link }) {
               value={roomId}
             /> */}
           </div>
+          <div>
           {webcamActive && (
-            <div
+          <div> 
+           <div
               style={{
                 fontSize: "2rem",
                 position: "fixed",
                 left: "600px",
                 color: "white",
-                top: "550px",
+                top: "500px",
                 padding: "20px 20px",
                 borderRadius: "50%",
                 background: "red",
@@ -360,9 +390,49 @@ function Videos({ mode, callId, setPage, link }) {
               }}
               onClick={handleHandUp}
             >
+              
               <AddIcCallIcon fontSize="inherit" color="inherit" />
             </div>
+            <div
+              style={{
+                fontSize: "1rem",
+                position: "fixed",
+                left: "700px",
+                color: "white",
+                top: "500px",
+                padding: "20px 20px",
+                borderRadius: "50%",
+                background: "red",
+                display: "flex",
+                justifyContent: "center",
+                height:"70px",
+                textAlign:"center",
+              }}
+              onClick={handleOpen}
+            >
+             Chat 
+              {/* model */}
+              </div>
+      <Draggable>
+              <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+       
+        <CronoBox>
+          <Chat/>
+        </CronoBox>
+        <hr />
+      </Box>
+    </Modal>
+            </Draggable>
+              {/* model */}
+            </div>
           )}
+          </div>
           {/* <button onClick={handleHandUp}>Hang Up</button> */}
         </div>
       </div>
@@ -462,3 +532,43 @@ function Videos({ mode, callId, setPage, link }) {
 
   
  */
+
+
+      
+const TopBar = styled.div`
+width: 100%;
+display: flex;
+margin: 0%;
+/* border: 1px solid black; */
+& .back_arrow {
+  width: 1%;
+}
+& .text {
+  width: 95%;
+  margin-bottom: -1%;
+  text-align: center;
+}
+& .cross {
+  width: 5%;
+
+  & .btn-cross {
+    background-color: white;
+    border: 0;
+  }
+}
+`;
+
+const CronoBox = styled.div`
+width: 94%;
+margin: 2% auto;
+text-align: center;
+align-items: center;
+`;
+
+const JoinBtn = styled.div`
+& .proceed-btn {
+  align-items: center;
+  width: 90%;
+  margin: 2% 5%;
+}
+`;

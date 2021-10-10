@@ -32,7 +32,7 @@ const temp = loggedData._id
     <div className={styles.Navbody}>
       <Navbars>
         <Link to="/">
-          <img height="40px" src="" alt="LOGO" />
+          <img height="40px" src="https://images.vexels.com/media/users/3/216751/raw/a525182aedd0f213326b3682eabfa5ee-online-study-logo-template.jpg" alt="LOGO" />
         </Link>
 
         <div

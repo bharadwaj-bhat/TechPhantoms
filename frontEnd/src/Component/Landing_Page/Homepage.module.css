@@ -106,7 +106,7 @@
   padding: 0 15px 25px 15px;
   position: relative;
   margin-top: -10px;
-  background-color: rgb(9, 81, 152);
+  background-color: #26168b;
 }
 .MainImageBox > h1 {
   font-weight: 500;
@@ -124,7 +124,7 @@
   flex-direction: row;
   width: 90%;
   margin: auto;
-  background-color: rgb(9, 81, 152);
+  background-color:#26168b ;
   transition: all 300ms ease-in-out;
 }
 

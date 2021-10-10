@@ -15,6 +15,7 @@ import { Chat } from "./Component/Chat/Chat";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { ChatBox } from "./Component/VideoStream/Chatbox";
 
 export const userContext = createContext();
 
@@ -95,6 +96,9 @@ function App() {
           </Route>
           <Route exact path="/temp">
             <VideoStream />
+          </Route>
+          <Route exact path="/chatBox">
+            <ChatBox/>
           </Route>
         </Switch>
         <Footer />

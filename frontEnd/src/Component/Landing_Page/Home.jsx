@@ -46,10 +46,10 @@ function Home() {
             marginBottom: "6px",
           }}
         >
-          <polygon
+          {/* <polygon
             points="0,60 0,30 1700,60"
             style={{ fill: "#c76767", stroke: "none", strokeWidth: "1" }}
-          />
+          /> */}
         </svg>
       </div>
 
