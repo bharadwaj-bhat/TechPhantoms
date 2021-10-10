@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer, useState } from "react";
-import Signup from "./Component/Login_Signup/Signup";
+// import Signup from "./Component/Login_Signup/Signup";
 import Login from "./Component/Login_Signup/Login";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Component/Landing_Page/Home";
@@ -21,9 +21,9 @@ export const userContext = createContext();
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [page, setPage] = useState("create");
-  const [temp, setTemp] = useState(true);
-  const [link, setLink] = useState("");
+  const [, setPage] = useState("create");
+  // const [temp, setTemp] = useState(true);
+  const [, setLink] = useState("");
 
   // console.log("p", props.location());
 
@@ -52,22 +52,7 @@ function App() {
     };
   }, []);
 
-  // if (temp) {
-  //   return (
-  //     <VideoStream
-  //       link={link}
-  //       setLink={setLink}
-  //       page={page}
-  //       setPage={setPage}
-  //     />
-  //   );
-  // }
-
-  const [chatIsOpen, setChatIsOpen] = useState(false);
-
-  console.log("state:", state);
-
-  let width = chatIsOpen ? "60%" : "100%";
+  // const [chatIsOpen] = useState(false);
 
   return (
     <>
@@ -98,7 +83,7 @@ function App() {
             <VideoStream />
           </Route>
           <Route exact path="/chatBox">
-            <ChatBox/>
+            <ChatBox />
           </Route>
         </Switch>
         <Footer />
