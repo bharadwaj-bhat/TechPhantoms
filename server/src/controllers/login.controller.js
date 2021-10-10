@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     let token;
     const { email, password } = req.body;
     if (!email || !password) {
-      console.log(Notification("Rakesh", "Rakesh notification"))
+     
       
       return res.status(422).json({ error: "You can't empty the faild" });
     }

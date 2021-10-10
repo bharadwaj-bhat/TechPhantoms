@@ -9,6 +9,7 @@ import Logout from "./Component/Login_Signup/Logout";
 import { initialState, reducer } from "./Reducer/reducer";
 import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
+import { Chat } from "./Component/Chat/Chat";
 
 export const userContext = createContext();
 
@@ -36,6 +37,9 @@ function App() {
               <Logout />
             </Route>
             <Route path="/temp" component={VideoStream} />
+            <Route path = "/chat">
+              <Chat/>
+            </Route>
           </Switch>
 
           <Footer />
