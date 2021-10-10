@@ -37,7 +37,9 @@ const pusher = new Pusher({
 
 app.post("/chat" , async function (req, res) {
   const { message, userName } = req.body;
+  // console.log(message)
   // trigger a new post event via pusher
+  Notification("new message" , );
   await pusher.trigger("my-channel", "my-event", {
     message,
     userName,
@@ -47,6 +49,8 @@ app.post("/chat" , async function (req, res) {
   res.json({ status: 200 });
 
 })
+
+
 
 const PORT = process.env.SERVER_PORT || 4500;
 

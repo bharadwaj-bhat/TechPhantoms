@@ -24,6 +24,8 @@ function App() {
       <userContext.Provider value={{ state, dispatch }}>
         <Navbar />
 
+       
+
         <Switch>
           <Route exact path="/">
             <Home />
@@ -43,8 +45,22 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
+          <Route path = "/chat" exact>
+            <Chat/>
+          </Route>
          
-          <Route path="/temp" component={VideoStream} />
+          <Route path="/temp">
+            <div style = {{display : "flex"}}> 
+            <div style = {{maxWidth:"100%" , backgroundColor:"black"}}>
+            <VideoStream />
+            </div>
+            
+            <div style = {{width:"0%" , backgroundColor:"red" ,display : "none"}}></div>
+            </div>
+           
+            
+
+            </Route>
         </Switch>
 
         <Footer />

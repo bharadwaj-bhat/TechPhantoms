@@ -3,12 +3,17 @@ import Pusher from 'pusher-js';
 import {ProfileDp} from './ProfileDp.jsx'
 import "./chatContent.css";
 import { ChatItem } from "./ChatItem.js";
-import axios from 'axios'
+import axios from 'axios';
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+
   // const [message'esEndRef] = useRef(null);
  
 export const ChatContent = (props)=> {
 
+  
 
+ 
+  
   const [chat, setChat] =  useState([]);
   const [message , setMessage] = useState("");
   const [userName , setUserName] = useState("");
@@ -52,13 +57,12 @@ export const ChatContent = (props)=> {
 
   const handleSubmit =async ()=> {
       
-     console.log(playLoad)
+    //  console.log(playLoad)
      scrollToBottom();
      setMessage("")
     axios.post("http://localhost:4500/chat", {
       message : JSON.stringify(playLoad)
     }).then((res)=> res)
-  
     
   }
   
@@ -68,15 +72,18 @@ export const ChatContent = (props)=> {
     cluster: 'ap2',
  
   });
-
+ 
     
     useEffect(()=>{
 
-     const name = prompt("enter the name");
+    //  const name = prompt("enter the name");
 
-     setUserName((e)=> {
-       return (e = name)
-     })
+    //  setUserName((e)=> {
+    //    return (e = name)
+    //  })
+   
+    
+
 
 
       let mounted = true;
@@ -86,7 +93,7 @@ export const ChatContent = (props)=> {
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
          const D = JSON.parse(data.message)
-          console.log(D)
+          // console.log(D)
           
            
          
@@ -112,7 +119,7 @@ export const ChatContent = (props)=> {
 
 
 
-console.log(chat)
+// console.log(chat)
 
 
 

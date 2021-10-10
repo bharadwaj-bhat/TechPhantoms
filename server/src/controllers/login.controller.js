@@ -4,12 +4,15 @@ const router = express.Router();
 const UserData = require("../models/user.model")
 
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const Notification = require("../pushNotifcation/Notification")
 router.get('/', (req, res) => {
     return res.status(200).json({ data: "hello loginpage" })
 
 })
 router.post('/', async (req, res) => {
+
+
     const { username, password } = req.body;
 
     const user = await UserData.findOne({ username: username })
@@ -39,11 +42,17 @@ router.post('/', async (req, res) => {
 
         }
         else {
+          Notification("hello ", `user ${username} was in the app `);
 
             res.status(200).json({
                 error: false,
                 message: 'User logged in successsfully', data: user,
             });
+
+           
+
+
+
         }
     }
 })

@@ -5,7 +5,7 @@ import { ChatBody } from "./chatBody/ChatBody"
 export const Chat = ()=>{
     return (<>
        
-       <div className="__main">
+       <div className="__main .root">
             <ChatBody/>
        </div>
 
