@@ -11,6 +11,7 @@ import { Footer } from "./Component/Footer/Footer";
 import { VideoStream } from "./Component/VideoStream/VideoStream";
 import "./App.css";
 import { DataForm } from "./Component/SelectField/DataForm";
+import { Chat } from "./Component/Chat/Chat";
 
 export const userContext = createContext();
 
@@ -23,9 +24,13 @@ function App() {
       <userContext.Provider value={{ state, dispatch }}>
         <Navbar />
 
+       
+
         <Switch>
           <Route exact path="/">
             <Home />
+         
+              
           </Route>
           <Route path="/signup" component={Signup} />
           <Route path="/login">
@@ -40,7 +45,15 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
-          <Route path="/temp" component={VideoStream} />
+          <Route path = "/chat" exact>
+            <Chat/>
+          </Route>
+         
+          <Route path="/temp">
+            
+            <VideoStream />
+    
+            </Route>
         </Switch>
 
         <Footer />
