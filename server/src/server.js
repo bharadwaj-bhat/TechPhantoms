@@ -4,8 +4,10 @@ const connect = require("./config/db");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
 app.use(cookieParser());
+const Pusher = require("pusher");
 const cookieparser = require("cookie-parser");
 
 app.use(express.json());
@@ -23,6 +25,28 @@ app.use("/users", userSchema);
 app.use("/login", logingRouter);
 app.use("/profile", profile);
 app.use("/logout", logout);
+
+
+const pusher = new Pusher({
+  appId: "1279266",
+  key: "bb620f86342dcb7e4205",
+  secret: "850f83d3e2f08c4add83",
+  cluster: "ap2",
+  useTLS: true
+});
+
+app.post("/chat" , async function (req, res) {
+  const { message, userName } = req.body;
+  // trigger a new post event via pusher
+  await pusher.trigger("my-channel", "my-event", {
+    message,
+    userName,
+  
+  });
+
+  res.json({ status: 200 });
+
+})
 
 const PORT = process.env.SERVER_PORT || 4500;
 

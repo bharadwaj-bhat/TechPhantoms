@@ -1,9 +1,13 @@
-
+import "./Chat.css"
+import { ChatBody } from "./chatBody/ChatBody"
 
 
 export const Chat = ()=>{
     return (<>
-        <h1>chat page </h1>
+       
+       <div className="__main">
+            <ChatBody/>
+       </div>
 
         </>
     )
