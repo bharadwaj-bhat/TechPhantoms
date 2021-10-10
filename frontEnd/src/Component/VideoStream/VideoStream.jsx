@@ -1,6 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useState, useRef, useEffect } from "react";
+import AddIcCallIcon from "@mui/icons-material/AddIcCall";
+import Draggable from "react-draggable";
+import { flexbox } from "@mui/system";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAot6COr6pX-qPc3vg4Wq_xGe2nq6IQurQ",
@@ -33,11 +36,11 @@ const servers = {
 };
 const pc = new RTCPeerConnection(servers);
 
-export function VideoStream({ link, page }) {
+export function VideoStream({ link, page = "create" }) {
   const [currentPage, setCurrentPage] = useState("home");
   const [joinCode, setJoinCode] = useState(link);
   // setJoinCode(link);
-  console.log(page, link, "link");
+  console.log(page);
 
   useEffect(() => {
     firestore
@@ -48,6 +51,7 @@ export function VideoStream({ link, page }) {
           let val = await doc.data();
           console.log("firestore val", val);
           setJoinCode(val.link);
+
           console.log("fr ue", val.link);
         });
       });
@@ -61,6 +65,13 @@ export function VideoStream({ link, page }) {
 
   return (
     <div className="app">
+      {/* <h1>ksjdfhkjhsdf</h1>
+      <h1>ksjdfhkjhsdf</h1>
+      <h1>ksjdfhkjhsdf</h1>
+      <h1>ksjdfhkjhsdf</h1>
+      <h1>ksjdfhkjhsdf</h1>
+      <h1>ksjdfhkjhsdf</h1> */}
+
       {currentPage === "home" ? (
         <Menu
           joinCode={joinCode}
@@ -83,25 +94,52 @@ export function VideoStream({ link, page }) {
 function Menu({ joinCode, setJoinCode, setPage, page }) {
   return (
     <div>
-      <div>
-        <button
-          onClick={() => {
-            setPage("create");
-            //  setupSources();
-          }}
-        >
-          ready to hustle
-        </button>
+      <div
+        style={{
+          position: "absolute",
+          top: "100px",
+          left: "630px",
+          color: "white",
+          fontSize: "1.1rem",
+        }}
+      >
+        {joinCode !== "" ? (
+          <button
+            style={{
+              border: "none",
+              padding: "15px 25px",
+              background: "black",
+              color: "white",
+            }}
+            onClick={() => setPage("join")}
+          >
+            Get Started
+          </button>
+        ) : (
+          <button
+            style={{
+              border: "none",
+              padding: "15px 25px",
+              background: "black",
+              color: "white",
+            }}
+            onClick={() => {
+              setPage("create");
+              //  setupSources();
+            }}
+          >
+            Get Started
+          </button>
+        )}
       </div>
 
-      <div>
+      {/* <div>
         <input
           value={joinCode}
           onChange={(e) => setJoinCode(e.target.value)}
           placeholder="Join with code"
         />
-        <button onClick={() => setPage("join")}>Answer</button>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -256,41 +294,112 @@ function Videos({ mode, callId, setPage, link }) {
   };
 
   return (
-    <div style={{ maxWidth: "80vw", margin: "auto" }}>
+    <div style={{ maxWidth: "100vw", background: "black" }}>
+      <Draggable>
+        <div
+          style={{
+            position: "absolute",
+            top: "80px",
+            left: "130px",
+            width: "250px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            zIndex: 5,
+          }}
+        >
+          <video width="100%" ref={localRef} autoPlay playsInline muted />
+        </div>
+      </Draggable>
       <div
         style={{
-          position: "absolute",
-          top: "80px",
-          left: "130px",
-          zIndex: 5,
+          width: "80%",
+          margin: "auto",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "50px",
         }}
-      >
-        <video width="320" ref={localRef} autoPlay playsInline muted />
-      </div>
-      <div style={{ width: "100%", margin: "auto" }}></div>
-      <video width="900" ref={remoteRef} autoPlay playsInline />
+      ></div>
+      <video height="auto" width="100%" ref={remoteRef} autoPlay playsInline />
 
       <div>
-        <button onClick={handleHandUp} disabled={!webcamActive}></button>
         <div>
           <div>
-            <input
+            {/* <input
               onChange={(e) => setRoomId(e.target.value)}
               type="text"
               value={roomId}
-            />
+            /> */}
           </div>
-          <button onClick={handleHandUp}>Hang Up</button>
+          {webcamActive && (
+            <div
+              style={{
+                fontSize: "2rem",
+                position: "fixed",
+                left: "600px",
+                color: "white",
+                top: "550px",
+                padding: "20px 20px",
+                borderRadius: "50%",
+                background: "red",
+                display: "flex",
+
+                justifyContent: "center",
+              }}
+              onClick={handleHandUp}
+            >
+              <AddIcCallIcon fontSize="inherit" color="inherit" />
+            </div>
+          )}
+          {/* <button onClick={handleHandUp}>Hang Up</button> */}
         </div>
       </div>
 
       {!webcamActive && (
-        <div>
-          <div>
-            <h3>allow camera and click start</h3>
-            <div>
-              <button onClick={() => setPage("home")}>Cancel</button>
-              <button onClick={setupSources}>Start</button>
+        <div
+          style={{
+            position: "absolute",
+            top: "120px",
+            left: "480px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              boder: "1px solid red",
+            }}
+          >
+            <h3 style={{ color: "white" }}>
+              Allow camera access and click start
+            </h3>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                style={{
+                  border: "none",
+                  padding: "15px 25px",
+                  background: "white",
+                  color: "black",
+                  marginRight: "4px",
+                }}
+                onClick={() => setPage("home")}
+              >
+                Cancel
+              </button>
+
+              <button
+                style={{
+                  border: "none",
+                  padding: "15px 25px",
+                  background: "white",
+                  color: "black",
+                }}
+                onClick={setupSources}
+              >
+                Start
+              </button>
             </div>
           </div>
         </div>

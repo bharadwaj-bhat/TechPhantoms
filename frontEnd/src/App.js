@@ -23,6 +23,8 @@ function App() {
   const [temp, setTemp] = useState(true);
   const [link, setLink] = useState("");
 
+  // console.log("p", props.location());
+
   useEffect(() => {
     const db = firebase.firestore();
 
@@ -48,23 +50,23 @@ function App() {
     };
   }, []);
 
-  if (temp) {
-    return (
-      <VideoStream
-        link={link}
-        setLink={setLink}
-        page={page}
-        setPage={setPage}
-      />
-    );
-  }
+  // if (temp) {
+  //   return (
+  //     <VideoStream
+  //       link={link}
+  //       setLink={setLink}
+  //       page={page}
+  //       setPage={setPage}
+  //     />
+  //   );
+  // }
 
   console.log("state:", state);
 
   return (
     <>
       <userContext.Provider value={{ state, dispatch }}>
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Switch>
           <Route exact path="/">
@@ -83,11 +85,10 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
-          <Route path="/temp" component={VideoStream} />
         </Switch>
-
-        <Footer />
+        {/* <Footer /> */}
       </userContext.Provider>
+      <Route exact path="/temp" component={VideoStream} />
     </>
   );
 }

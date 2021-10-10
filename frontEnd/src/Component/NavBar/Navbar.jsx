@@ -86,7 +86,7 @@ function Navbar() {
       >
         <polygon
           points="-300,0 1400,-30 1700,20"
-          style={{ fill:{cardBgColor}, stroke: "none", strokeWidth: "1" }}
+          style={{ fill: { cardBgColor }, stroke: "none", strokeWidth: "1" }}
         />
       </svg>
     </div>
