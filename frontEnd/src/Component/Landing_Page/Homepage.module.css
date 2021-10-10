@@ -1,3 +1,6 @@
+.mainbox {
+  padding-top: 70px;
+}
 .Onvideo {
   margin-top: -40%;
   margin-bottom: 20px;
@@ -28,10 +31,10 @@
 }
 
 .button:hover {
-  background: rgb(51, 48, 212);
+  background: rgb(44, 12, 73);
 }
 
-.Subject-flex {
+.Subjectflex {
   /* background-color: black; */
   margin: auto;
   margin-top: -20px;
@@ -145,7 +148,7 @@
   margin-left: 90px;
   border-radius: 25px;
 }
-.C-head {
+.Chead {
   color: #222;
   font-size: 16px;
 }

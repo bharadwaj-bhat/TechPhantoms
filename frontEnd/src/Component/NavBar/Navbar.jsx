@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { userContext } from "../../App";
-
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
+import { cardBgColor } from "../Colors/colors";
+// import "./Navbar.css";
 
 function Navbar() {
   const { state } = useContext(userContext);
+  console.log("state:", state);
 
   return (
-    <div className="Navbody">
+    <div className={styles.Navbody}>
       <Navbars>
         <Link to="/">
           <img height="40px" src="" alt="LOGO" />
@@ -25,34 +27,23 @@ function Navbar() {
           }}
         >
           <Hover>
-            <Link to="/profile" className="links">
+            <Link to="/profile" className={styles.links}>
               Dashboard
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Learn
             </Link>
           </Hover>
           <Hover>
-            <Link to="#" className="links">
+            <Link to="#" className={styles.links}>
               Guides
             </Link>
           </Hover>
           <Hover>
             {state ? (
-              <button
-                style={{
-                  borderRadius: "30px",
-                  width: "100px",
-                  border: "none",
-                  backgroundColor: "rgb(192,45,40)",
-                  marginTop: "-9px",
-                  height: "40px",
-                  paddingTop: "5px",
-                  cursor: "pointer",
-                }}
-              >
+              <button className={styles.buttonlink}>
                 <Link
                   to="/logout"
                   style={{
@@ -67,18 +58,7 @@ function Navbar() {
                 </Link>
               </button>
             ) : (
-              <button
-                style={{
-                  borderRadius: "30px",
-                  width: "100px",
-                  border: "none",
-                  backgroundColor: "rgb(192,45,40)",
-                  marginTop: "-9px",
-                  height: "40px",
-                  paddingTop: "5px",
-                  cursor: "pointer",
-                }}
-              >
+              <button className={styles.buttonlink}>
                 <Link
                   to="/login"
                   style={{
@@ -97,11 +77,16 @@ function Navbar() {
         </div>
       </Navbars>
       <svg
-        style={{ height: "70", width: "100%", zIndex: "1", marginTop: "7px" }}
+        style={{
+          height: "70px",
+          width: "100%",
+          zIndex: "1",
+          marginTop: "-2px",
+        }}
       >
         <polygon
           points="-300,0 1400,-30 1700,20"
-          style={{ fill: "#e91d1d", stroke: "none", strokeWidth: "1" }}
+          style={{ fill:{cardBgColor}, stroke: "none", strokeWidth: "1" }}
         />
       </svg>
     </div>
@@ -122,7 +107,7 @@ export const Navbars = styled.div`
 export const Hover = styled.div`
   color: white;
   text-decoration: none;
-  &::hover {
+  &:hover {
     Link {
       background-color: white;
       display: none;

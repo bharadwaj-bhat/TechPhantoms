@@ -1,41 +1,62 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-require("dotenv").config();
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const signupSchema = new mongoose.Schema(
-  {
-    user_name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    confirm_password: { type: String, required: true },
-    tokens: [{ token: { type: String, required: false } }],
-  },
-  {
-    versionKey: false,
-    timestamps: true,
-  }
+const reqString = {
+    type: String,
+    required: true,
+    trim: true,
+};
+const sample = "https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300"
+const usersSchema = new mongoose.Schema(
+    {
+        username: reqString,
+        fullname: reqString,
+        email: reqString,
+        password: reqString,
+        number: { type: Number },
+        profilePic: { type: String, default: sample },
+        attended_lec: {type:Number,require:false,default:0},
+        goals: {type:Number,require:false,default:0},
+        history: [
+            { type: mongoose.Schema.Types.ObjectId, ref: 'post', required: true },
+        ],
+        isNewNotification: { type: Boolean, default: false },
+        tokens: [
+            {
+                token: reqString,
+            },
+        ],
+    },
+    {
+        versionKey: false,
+        timestamps: true,
+
+    }
 );
 
-signupSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 12);
-
-    this.confirm_password = await bcrypt.hash(this.confirm_password, 12);
-  }
-  next();
+// hashing the password
+usersSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 8);
+    }
+    next();
 });
 
-signupSchema.methods.generateAuthToken = async function () {
-  try {
-    let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
-    this.tokens = this.tokens.concat({ token: token });
-    await this.save();
-    return token;
-  } catch (err) {
-    console.log(err);
-  }
+// generating auth token
+usersSchema.methods.generateAuthToken = async function () {
+    try {
+        // jwt.sign(payload, secretOrPrivateKey,[optional,callback])
+        const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET_KEY);
+        this.tokens = this.tokens.concat({ token: token });
+        await this.save();
+        return token;
+    } catch (err) {
+        console.log(err);
+    }
 };
-const User = mongoose.model("user", signupSchema);
-module.exports = User;
+
+// collection creation
+const UsersData = mongoose.model('user', usersSchema);
+
+module.exports = UsersData;

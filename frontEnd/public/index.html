@@ -2,6 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -43,13 +51,13 @@
   <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
   <script>
     const beamsClient = new PusherPushNotifications.Client({
-      instanceId: '3828568d-067a-4cba-ae01-8b29f41115ba',
+      instanceId: "3828568d-067a-4cba-ae01-8b29f41115ba",
     });
-  
-    beamsClient.start()
-      .then(() => beamsClient.addDeviceInterest('hello'))
-      .then(() => console.log('Successfully registered and subscribed!'))
+
+    beamsClient
+      .start()
+      .then(() => beamsClient.addDeviceInterest("hello"))
+      .then(() => console.log("Successfully registered and subscribed!"))
       .catch(console.error);
   </script>
-       
 </html>

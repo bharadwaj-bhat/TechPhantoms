@@ -5,12 +5,12 @@ import {
   AiFillInstagram,
   AiFillFacebook,
 } from "react-icons/ai";
-import "./Footer.css";
+import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <div className="footerbody">
-      <div className="footerlink">
+    <div className={styles.footerbody}>
+      <div className={styles.footerlink}>
         <div>
           {/* <Link to="/">
             <img
@@ -22,7 +22,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="social">
+      <div className={styles.social}>
         <AiFillTwitterCircle /> &nbsp;
         <AiFillLinkedin /> &nbsp;
         <AiFillInstagram />

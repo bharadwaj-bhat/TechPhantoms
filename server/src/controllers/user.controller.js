@@ -4,8 +4,9 @@ require("../config/db");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { user_name, email, password, confirm_password } = req.body;
-  if (!user_name || !email || !password || !confirm_password) {
+  const { username, email, password, fullname, number,profilePic } = req.body;
+  console.log(req.body)
+  if (!username || !email || !password || !fullname ) {
     return res.status(422).json({ error: "please fill all the data" });
   }
   try {
@@ -14,7 +15,7 @@ router.post("/", async (req, res) => {
       return res.status(422).json({ error: "Allrady user Exist" });
     }
 
-    const user = new User({ user_name, email, password, confirm_password });
+    const user = new User({ username, email, password, fullname , number });
     await user.save();
     res.status(201).json({ message: "user register sucessfully" });
   } catch (err) {
