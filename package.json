@@ -32,13 +32,25 @@
     "styled-components": "^5.3.1",
     "thunk": "0.0.1",
     "web-vitals": "^1.0.1",
-    "pusher-js": "^7.0.3"
+    "pusher-js": "^7.0.3",
+    "@pusher/push-notifications-server": "^1.2.4",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.9",
+    "multer": "^1.4.3",
+    "pusher": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon src/Server/server "
   },
   "eslintConfig": {
     "extends": [

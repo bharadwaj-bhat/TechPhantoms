@@ -1,33 +1,24 @@
-import React, { useState } from "react";
-import { Box, Button, Input, Modal, Typography } from "@material-ui/core";
+import React from "react";
+import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import { CronoTimeline } from "./CronoTimeline";
+import { Chat } from "../Chat/Chat";
 const style = {
   position: "absolute",
-  top: "50%",
+  top: "20%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "50%",
-  height: "95%",
+  width: "40%",
+  height: "50%",
   bgcolor: "background.paper",
   boxShadow: 24,
-  border: "1px solid #b9afaf",
   p: 4,
   borderRadius: "10px",
 };
 
-export const DataForm = () => {
-  const history = useHistory();
-
+export const ChatBox = () => {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
-    history.push("/");
-  };
-
-  const historyHandler = () => {
-    history.push("/temp");
   };
 
   return (
@@ -39,12 +30,6 @@ export const DataForm = () => {
     >
       <Box sx={style}>
         <TopBar>
-          <div className="back_arrow"></div>
-          <div className="text">
-            <Typography variant="h4" gutterBottom component="div">
-              SELECT AND JOIN NOW!{" "}
-            </Typography>
-          </div>
           <div class="cross">
             <button onClick={handleClose} class="btn-cross" type="button">
               <div class="QBdPU ">
@@ -70,20 +55,9 @@ export const DataForm = () => {
         </TopBar>
         <hr />
         <CronoBox>
-          <CronoTimeline />
+          <Chat />
         </CronoBox>
         <hr />
-        <JoinBtn>
-          <Button
-            color="primary"
-            variant="contained"
-            className="proceed-btn"
-            onClick={historyHandler}
-          >
-            {" "}
-            Select{" "}
-          </Button>
-        </JoinBtn>
       </Box>
     </Modal>
   );
@@ -119,10 +93,10 @@ const CronoBox = styled.div`
   align-items: center;
 `;
 
-const JoinBtn = styled.div`
-  & .proceed-btn {
-    align-items: center;
-    width: 90%;
-    margin: 2% 5%;
-  }
-`;
+// const JoinBtn = styled.div`
+//   & .proceed-btn {
+//     align-items: center;
+//     width: 90%;
+//     margin: 2% 5%;
+//   }
+// `;

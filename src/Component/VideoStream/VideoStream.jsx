@@ -3,10 +3,8 @@ import "firebase/firestore";
 import { useState, useRef, useEffect } from "react";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import Draggable from "react-draggable";
-import { Box, Button, Input, Modal, Popper, Typography } from "@material-ui/core";
-import { flexbox } from "@mui/system";
-import { Redirect, useHistory } from "react-router";
-import styled from 'styled-components'
+import { Box, Button, Modal } from "@material-ui/core";
+import styled from "styled-components";
 import { Chat } from "../Chat/Chat";
 
 const firebaseConfig = {
@@ -45,7 +43,6 @@ export function VideoStream({ link, page = "create", setChatIsOpen }) {
   const [joinCode, setJoinCode] = useState(link);
   // setJoinCode(link);
 
-  
   console.log(page);
 
   useEffect(() => {
@@ -115,7 +112,7 @@ function Menu({ joinCode, setJoinCode, setPage, page }) {
             style={{
               border: "none",
               padding: "15px 25px",
-              margin:"35vh auto",
+              margin: "35vh auto",
               background: "#26168bc1",
               color: "white",
             }}
@@ -128,7 +125,7 @@ function Menu({ joinCode, setJoinCode, setPage, page }) {
             style={{
               border: "none",
               padding: "15px 25px",
-              backgroundColor:"black",
+              backgroundColor: "black",
               color: "white",
             }}
             onClick={() => {
@@ -166,12 +163,10 @@ const style = {
 };
 
 function Videos({ mode, callId, setPage, link }) {
-  const history = useHistory()
   const [webcamActive, setWebcamActive] = useState(false);
   const [roomId, setRoomId] = useState(callId);
 
-  const [chatIsOpen, setChatIsOpen] = useState(false);
-
+  const [chatIsOpen] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -180,10 +175,10 @@ function Videos({ mode, callId, setPage, link }) {
     setOpen(false);
   };
 
-  const handleOpen = () =>{
-    console.log('open');
-    setOpen(true)
-  }
+  const handleOpen = () => {
+    console.log("open");
+    setOpen(true);
+  };
 
   const localRef = useRef();
   const remoteRef = useRef();
@@ -331,7 +326,12 @@ function Videos({ mode, callId, setPage, link }) {
   };
 
   return (
-    <div style={{ maxWidth: "100vw", background:"linear-gradient(90deg, #e6be7676 50%, #db6bdb61 50%" }}>
+    <div
+      style={{
+        maxWidth: "100vw",
+        background: "linear-gradient(90deg, #e6be7676 50%, #db6bdb61 50%",
+      }}
+    >
       {/* <button onClick={() => setChatIsOpen(true)}> TEMPPP </button> */}
 
       <Draggable>
@@ -372,66 +372,64 @@ function Videos({ mode, callId, setPage, link }) {
             /> */}
           </div>
           <div>
-          {webcamActive && (
-          <div> 
-           <div
-              style={{
-                fontSize: "2rem",
-                position: "fixed",
-                left: "600px",
-                color: "white",
-                top: "500px",
-                padding: "20px 20px",
-                borderRadius: "50%",
-                background: "red",
-                display: "flex",
+            {webcamActive && (
+              <div>
+                <div
+                  style={{
+                    fontSize: "2rem",
+                    position: "fixed",
+                    left: "600px",
+                    color: "white",
+                    top: "500px",
+                    padding: "20px 20px",
+                    borderRadius: "50%",
+                    background: "red",
+                    display: "flex",
 
-                justifyContent: "center",
-              }}
-              onClick={handleHandUp}
-            >
-              
-              <AddIcCallIcon fontSize="inherit" color="inherit" />
-            </div>
-            <div
-              style={{
-                fontSize: "1rem",
-                position: "fixed",
-                left: "700px",
-                color: "white",
-                top: "500px",
-                padding: "20px 20px",
-                borderRadius: "50%",
-                background: "red",
-                display: "flex",
-                justifyContent: "center",
-                height:"70px",
-                textAlign:"center",
-              }}
-              onClick={handleOpen}
-            >
-             Chat 
-              {/* model */}
+                    justifyContent: "center",
+                  }}
+                  onClick={handleHandUp}
+                >
+                  <AddIcCallIcon fontSize="inherit" color="inherit" />
+                </div>
+                <div
+                  style={{
+                    fontSize: "1rem",
+                    position: "fixed",
+                    left: "700px",
+                    color: "white",
+                    top: "500px",
+                    padding: "20px 20px",
+                    borderRadius: "50%",
+                    background: "red",
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "70px",
+                    textAlign: "center",
+                  }}
+                  onClick={handleOpen}
+                >
+                  Chat
+                  {/* model */}
+                </div>
+                <Draggable>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <CronoBox>
+                        <Chat />
+                      </CronoBox>
+                      <hr />
+                    </Box>
+                  </Modal>
+                </Draggable>
+                {/* model */}
               </div>
-      <Draggable>
-              <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-       
-        <CronoBox>
-          <Chat/>
-        </CronoBox>
-        <hr />
-      </Box>
-    </Modal>
-            </Draggable>
-              {/* model */}
-            </div>
-          )}
+            )}
           </div>
           {/* <button onClick={handleHandUp}>Hang Up</button> */}
         </div>
@@ -453,18 +451,16 @@ function Videos({ mode, callId, setPage, link }) {
               boder: "1px solid red",
             }}
           >
-            <h2>
-              Allow camera access and click start
-            </h2>
-            <div style={{ display: "flex", alignItems:"center"}}>
+            <h2>Allow camera access and click start</h2>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <Button
-              variant="contained"
-              color="secondary"
+                variant="contained"
+                color="secondary"
                 style={{
                   border: "none",
                   padding: "15px 25px",
                   marginRight: "1%",
-                  marginLeft:"20%"
+                  marginLeft: "20%",
                 }}
                 onClick={() => setPage("home")}
               >
@@ -472,12 +468,12 @@ function Videos({ mode, callId, setPage, link }) {
               </Button>
 
               <Button
-              variant="contained"
-              color="primary"
+                variant="contained"
+                color="primary"
                 style={{
                   border: "none",
                   padding: "15px 25px",
-                  marginLeft:"1%"
+                  marginLeft: "1%",
                 }}
                 onClick={setupSources}
               >
@@ -533,42 +529,40 @@ function Videos({ mode, callId, setPage, link }) {
   
  */
 
+// const TopBar = styled.div`
+//   width: 100%;
+//   display: flex;
+//   margin: 0%;
+//   /* border: 1px solid black; */
+//   & .back_arrow {
+//     width: 1%;
+//   }
+//   & .text {
+//     width: 95%;
+//     margin-bottom: -1%;
+//     text-align: center;
+//   }
+//   & .cross {
+//     width: 5%;
 
-      
-const TopBar = styled.div`
-width: 100%;
-display: flex;
-margin: 0%;
-/* border: 1px solid black; */
-& .back_arrow {
-  width: 1%;
-}
-& .text {
-  width: 95%;
-  margin-bottom: -1%;
-  text-align: center;
-}
-& .cross {
-  width: 5%;
-
-  & .btn-cross {
-    background-color: white;
-    border: 0;
-  }
-}
-`;
+//     & .btn-cross {
+//       background-color: white;
+//       border: 0;
+//     }
+//   }
+// `;
 
 const CronoBox = styled.div`
-width: 94%;
-margin: 2% auto;
-text-align: center;
-align-items: center;
+  width: 94%;
+  margin: 2% auto;
+  text-align: center;
+  align-items: center;
 `;
 
-const JoinBtn = styled.div`
-& .proceed-btn {
-  align-items: center;
-  width: 90%;
-  margin: 2% 5%;
-}
-`;
+// const JoinBtn = styled.div`
+//   & .proceed-btn {
+//     align-items: center;
+//     width: 90%;
+//     margin: 2% 5%;
+//   }
+// `;
